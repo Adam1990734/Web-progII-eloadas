@@ -9,7 +9,8 @@
 		@include('header')
     </div>
     <div class="content">
-		{{ $slot }}
+      <?php var_dump($slot); ?>
+		  {{ $slot }}
     </div>
   </body>
 </html>
