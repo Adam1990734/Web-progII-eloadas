@@ -4,32 +4,35 @@ namespace App\Services\Implementations;
 
 use App\Models\Inventor;
 use App\Models\InventorDto;
+use App\Models\InventorDto\InventorMinimalDto;
+use App\Models\InventorDto\InventorRequestDto;
+use App\Models\InventorDto\InventorResponseDto;
 use App\Services\InventorService;
 
 class InventorServiceImp implements InventorService
 {
 
-    public function findAll($page, $len): InventorDto\InventorResponseDto
+    public function findAll($page, $len): InventorResponseDto
     {
         // TODO: Implement findAll() method.
     }
 
-    public function findById(int $id, bool $isMinimal = false): InventorDto\InventorResponseDto|InventorDto\InventorMinimalDto
+    public function findById(int $id, bool $isMinimal = false): InventorResponseDto|InventorMinimalDto
     {
         // TODO: Implement findById() method.
     }
 
-    public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20): InventorDto\InventorResponseDto|InventorDto\InventorMinimalDto
+    public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20): InventorResponseDto|InventorMinimalDto
     {
         // TODO: Implement fingAllByName() method.
     }
 
-    public function create(): InventorDto\InventorResponseDto
+    public function create(): InventorResponseDto
     {
         // TODO: Implement create() method.
     }
 
-    public function update(int $id, InventorDto\InventorRequestDto $dto): InventorDto\InventorResponseDto
+    public function update(int $id, InventorRequestDto $dto): InventorResponseDto
     {
         // TODO: Implement update() method.
     }
@@ -39,17 +42,17 @@ class InventorServiceImp implements InventorService
         // TODO: Implement delete() method.
     }
 
-    public function toReqDto(Inventor $invention): InventorDto\InventorRequestDto
+    public function toReqDto(Inventor $invention): InventorRequestDto
     {
         // TODO: Implement toReqDto() method.
     }
 
-    public function toRespDto(Inventor $invention): InventorDto\InventorResponseDto
+    public function toRespDto(Inventor $invention): InventorResponseDto
     {
         // TODO: Implement toRespDto() method.
     }
 
-    public function toMinDto(Inventor $invention): InventorDto\InventorMinimalDto
+    public function toMinDto(Inventor $invention): InventorMinimalDto
     {
         // TODO: Implement toMinDto() method.
     }
