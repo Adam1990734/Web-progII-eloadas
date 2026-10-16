@@ -8,6 +8,7 @@ use App\Models\Invention;
 class Inventor extends Model
 {
     protected $fillable = [
+        'id',
         'name',
         'bornat',
         'diedat',

@@ -1,148 +1,148 @@
 tkod	talnev
-78	mikrobarázdás hanglemez
-24	fázisváltós villamos mozdony
+78	mikrobarÃ¡zdÃ¡s hanglemez
+24	fÃ¡zisvÃ¡ltÃ³s villamos mozdony
 31	Frommer-pisztoly
-46	Heller—Forgó hûtõtorony
-56	hûtõtorony
-72	légkondenzációs hûtõtorony
-84	Ostwald-Buzágh-féle üledékszabály
+46	Hellerâ€”ForgÃ³ hÅ±tÅ‘torony
+56	hÅ±tÅ‘torony
+72	lÃ©gkondenzÃ¡ciÃ³s hÅ±tÅ‘torony
+84	Ostwald-BuzÃ¡gh-fÃ©le Ã¼ledÃ©kszabÃ¡ly
 89	PePy
-136	villámdelejes forgony
+136	villÃ¡mdelejes forgony
 45	HDTV
-134	Vaskapu-vízerõmû
-40	gulyáságyú
-33	F típusjelû három­fázisú aszinkron motorsorozat
-34	FF háromfázisú motorsorozat
-38	gázlift
-108	szénhidrogén-bányászat
-115	szolstabilitáskontinuitás elmélet
-119	telefonközpont
-12	bányavizek elleni védekezés
-51	hologramkiállítás
-53	hõenergetikai képzés
+134	Vaskapu-vÃ­zerÅ‘mÅ±
+40	gulyÃ¡sÃ¡gyÃº
+33	F tÃ­pusjelÅ± hÃ¡romÂ­fÃ¡zisÃº aszinkron motorsorozat
+34	FF hÃ¡romfÃ¡zisÃº motorsorozat
+38	gÃ¡zlift
+108	szÃ©nhidrogÃ©n-bÃ¡nyÃ¡szat
+115	szolstabilitÃ¡skontinuitÃ¡s elmÃ©let
+119	telefonkÃ¶zpont
+12	bÃ¡nyavizek elleni vÃ©dekezÃ©s
+51	hologramkiÃ¡llÃ­tÃ¡s
+53	hÅ‘energetikai kÃ©pzÃ©s
 54	HSCS
-59	IRX típusú ionoszféra-kutató berendezés
-65	kéregöntés
-88	papírgyártás
-116	szuperintenzív habelárasztás
-122	titkosítás
-127	turbógenerátor-gyártás
+59	IRX tÃ­pusÃº ionoszfÃ©ra-kutatÃ³ berendezÃ©s
+65	kÃ©regÃ¶ntÃ©s
+88	papÃ­rgyÃ¡rtÃ¡s
+116	szuperintenzÃ­v habelÃ¡rasztÃ¡s
+122	titkosÃ­tÃ¡s
+127	turbÃ³generÃ¡tor-gyÃ¡rtÃ¡s
 8	atomreaktor
 14	csillagmotor
-18	elektroncsöves audio-méter
-19	elõkamrás sûrítõ nélküli dízelmotor
-28	forgórostélyos gázgenerátor
-35	Ganz-gyár
-36	Ganz—Jendrassik-motor
+18	elektroncsÃ¶ves audio-mÃ©ter
+19	elÅ‘kamrÃ¡s sÅ±rÃ­tÅ‘ nÃ©lkÃ¼li dÃ­zelmotor
+28	forgÃ³rostÃ©lyos gÃ¡zgenerÃ¡tor
+35	Ganz-gyÃ¡r
+36	Ganzâ€”Jendrassik-motor
 50	Hold-radar
-61	Katicabogár
-82	négyütemû belsõ égésû motor
-90	perforátor
+61	KaticabogÃ¡r
+82	nÃ©gyÃ¼temÅ± belsÅ‘ Ã©gÃ©sÅ± motor
+90	perforÃ¡tor
 94	PKZ helikopter
-98	repulziós motor
-113	Szilvay-féle szárazoltásos rendszer
+98	repulziÃ³s motor
+113	Szilvay-fÃ©le szÃ¡razoltÃ¡sos rendszer
 124	traktor
-125	transzformátor
-132	Van de Graaff generátor
-139	vizuális mikroprocesszor
-144	zárt vasmagú transzformátor
-2	analogikai celluláris számítógép
-16	Duflex fényképezõgép
-25	fejtõgép
-27	forgódugattyús gép
-29	formulavezérlésû számítógép
-32	F-típusú fejtõ-rakodó gép
-39	Gerle repülõgép
-55	Hungária-Drill sorvetõgép
-66	Kolibri repülõgép
-75	marófejes jövesztõgép
-83	optikai rácsosztó gép
-85	öngerjesztésû kompaundált szinkrongép
-130	tûzgép
-135	vetõgép
-143	vonalzógép
-3	apró bordás hõcserélõ
-5	árammérõ
-44	háromdimenziós kijelzõ
-58	indukciós fogyasztásmérõ
-76	megvilágításmérõ
-93	Pintsch-féle gázmérõ
-106	szakadásiszög-mérõ
-120	termolumineszcens dózismérõ
-123	törtképes távmérõ
-128	turbógenerátor - tekercselõ
-137	villámfeszítõ
-140	vízemelõ
-4	áramfogó
-20	egysarkú villámindító
-41	gyorstávíró
-49	holdautó
-70	lemezmotor és lemezautó
-86	õsdinamó
-95	porlasztó
-97	Reich-fogó
-101	részecskegyorsító
-107	szárazoltó
-112	színes televízió
-118	telefonhírmondó
-121	termonukleáris reakció
-129	tükörcsavaros képíró
-142	volfrámszálas izzó
-146	automata sebességváltó
-62	karsztvíz elleni védekezés a bányaüzemekben
-69	kristálynövesztés ûrkemencében
+125	transzformÃ¡tor
+132	Van de Graaff generÃ¡tor
+139	vizuÃ¡lis mikroprocesszor
+144	zÃ¡rt vasmagÃº transzformÃ¡tor
+2	analogikai cellulÃ¡ris szÃ¡mÃ­tÃ³gÃ©p
+16	Duflex fÃ©nykÃ©pezÅ‘gÃ©p
+25	fejtÅ‘gÃ©p
+27	forgÃ³dugattyÃºs gÃ©p
+29	formulavezÃ©rlÃ©sÅ± szÃ¡mÃ­tÃ³gÃ©p
+32	F-tÃ­pusÃº fejtÅ‘-rakodÃ³ gÃ©p
+39	Gerle repÃ¼lÅ‘gÃ©p
+55	HungÃ¡ria-Drill sorvetÅ‘gÃ©p
+66	Kolibri repÃ¼lÅ‘gÃ©p
+75	marÃ³fejes jÃ¶vesztÅ‘gÃ©p
+83	optikai rÃ¡csosztÃ³ gÃ©p
+85	Ã¶ngerjesztÃ©sÅ± kompaundÃ¡lt szinkrongÃ©p
+130	tÅ±zgÃ©p
+135	vetÅ‘gÃ©p
+143	vonalzÃ³gÃ©p
+3	aprÃ³ bordÃ¡s hÅ‘cserÃ©lÅ‘
+5	Ã¡rammÃ©rÅ‘
+44	hÃ¡romdimenziÃ³s kijelzÅ‘
+58	indukciÃ³s fogyasztÃ¡smÃ©rÅ‘
+76	megvilÃ¡gÃ­tÃ¡smÃ©rÅ‘
+93	Pintsch-fÃ©le gÃ¡zmÃ©rÅ‘
+106	szakadÃ¡siszÃ¶g-mÃ©rÅ‘
+120	termolumineszcens dÃ³zismÃ©rÅ‘
+123	tÃ¶rtkÃ©pes tÃ¡vmÃ©rÅ‘
+128	turbÃ³generÃ¡tor - tekercselÅ‘
+137	villÃ¡mfeszÃ­tÅ‘
+140	vÃ­zemelÅ‘
+4	Ã¡ramfogÃ³
+20	egysarkÃº villÃ¡mindÃ­tÃ³
+41	gyorstÃ¡vÃ­rÃ³
+49	holdautÃ³
+70	lemezmotor Ã©s lemezautÃ³
+86	Å‘sdinamÃ³
+95	porlasztÃ³
+97	Reich-fogÃ³
+101	rÃ©szecskegyorsÃ­tÃ³
+107	szÃ¡razoltÃ³
+112	szÃ­nes televÃ­ziÃ³
+118	telefonhÃ­rmondÃ³
+121	termonukleÃ¡ris reakciÃ³
+129	tÃ¼kÃ¶rcsavaros kÃ©pÃ­rÃ³
+142	volfrÃ¡mszÃ¡las izzÃ³
+146	automata sebessÃ©gvÃ¡ltÃ³
+62	karsztvÃ­z elleni vÃ©dekezÃ©s a bÃ¡nyaÃ¼zemekben
+69	kristÃ¡lynÃ¶vesztÃ©s Å±rkemencÃ©ben
 147	C-vitamin
-37	Gasparcolor színes film
+37	Gasparcolor szÃ­nes film
 43	hangosfilm
-64	Kármán-spektrum
-114	színes film
-145	golyóstoll
-47	hengerszék
-57	impulzus tûzoltókészülék
-63	Kármán-féle örvénysornak
-73	légzõkészülék
+64	KÃ¡rmÃ¡n-spektrum
+114	szÃ­nes film
+145	golyÃ³stoll
+47	hengerszÃ©k
+57	impulzus tÅ±zoltÃ³kÃ©szÃ¼lÃ©k
+63	KÃ¡rmÃ¡n-fÃ©le Ã¶rvÃ©nysornak
+73	lÃ©gzÅ‘kÃ©szÃ¼lÃ©k
 80	mozdonyok
-102	Segner-kerék
-111	szimmetria­elvek
-74	LP—long-playing
-91	Petzval-féle összeg
-15	derivatográf
-23	farinográf
-22	excimer lézeres abláció háromdimenziós gyors­fényképezése
-26	fényképezõgép-lencse
+102	Segner-kerÃ©k
+111	szimmetriaÂ­elvek
+74	LPâ€”long-playing
+91	Petzval-fÃ©le Ã¶sszeg
+15	derivatogrÃ¡f
+23	farinogrÃ¡f
+22	excimer lÃ©zeres ablÃ¡ciÃ³ hÃ¡romdimenziÃ³s gyorsÂ­fÃ©nykÃ©pezÃ©se
+26	fÃ©nykÃ©pezÅ‘gÃ©p-lencse
 92	Pille
-105	Szabó-féle görgõs eke
-60	íven függõ vonórudas vashíd
-100	réselõrúd
-126	TS-uszályhíd
+105	SzabÃ³-fÃ©le gÃ¶rgÅ‘s eke
+60	Ã­ven fÃ¼ggÅ‘ vonÃ³rudas vashÃ­d
+100	rÃ©selÅ‘rÃºd
+126	TS-uszÃ¡lyhÃ­d
 10	BASIC
 17	EDVAC
 21	ENIAC
-99	réselõlánc
+99	rÃ©selÅ‘lÃ¡nc
 1	aerodinamika
 6	atombomba
-7	atommáglya
-11	Bánki-turbina
-13	chicagói atommáglya
-30	fõzés fizikája
-42	hangfelvevõ kamera
-48	hidrogénbomba
-52	holográfia
-67	körbe látó optika
-68	kriptonlámpa
-77	méter fogalma
-79	molekulaspektroszkópia
+7	atommÃ¡glya
+11	BÃ¡nki-turbina
+13	chicagÃ³i atommÃ¡glya
+30	fÅ‘zÃ©s fizikÃ¡ja
+42	hangfelvevÅ‘ kamera
+48	hidrogÃ©nbomba
+52	hologrÃ¡fia
+67	kÃ¶rbe lÃ¡tÃ³ optika
+68	kriptonlÃ¡mpa
+77	mÃ©ter fogalma
+79	molekulaspektroszkÃ³pia
 81	napenergia
 87	PAL-optika
-96	rakéta
-109	szikrapróba
-110	síkszita
-117	tekercsrugós vadászpuska
+96	rakÃ©ta
+109	szikraprÃ³ba
+110	sÃ­kszita
+117	tekercsrugÃ³s vadÃ¡szpuska
 133	Valtellina
-138	villanyóra
-141	vízóra
-9	atmoszferikus gõzgép 
-71	léggép 
-104	sûrített levegõ 
-131	ûrkemence 
+138	villanyÃ³ra
+141	vÃ­zÃ³ra
+9	atmoszferikus gÅ‘zgÃ©p 
+71	lÃ©ggÃ©p 
+104	sÅ±rÃ­tett levegÅ‘ 
+131	Å±rkemence 
 103	Super Kodak Six-20

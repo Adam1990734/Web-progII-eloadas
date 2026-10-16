@@ -1,81 +1,81 @@
 fkod	nev	szul	meghal
-40	K¸hne Ede	1839	1903
-14	DÈri Miksa	1854	1938
-16	Fejes Jenı	1877	1952
-56	Reich Ernı	1887	1965
-10	BrÛdy Imre	1891	1944
-3	Bay Zolt·n	1900	1992
+40	K√ºhne Ede	1839	1903
+14	D√©ri Miksa	1854	1938
+16	Fejes Jen≈ë	1877	1952
+56	Reich Ern≈ë	1887	1965
+10	Br√≥dy Imre	1891	1944
+3	Bay Zolt√°n	1900	1992
 72	Teller Ede	1908	2003
-6	B·rczy P·l	1941	
-5	B·nki Don·t	1859	1922
-33	Just S·ndor	1874	1937
-52	Pog·ny BÈla	1887	1943
-21	G·sp·r BÈla	1898	1973
-68	Szil·rd LeÛ	1898	1964
-79	BÌrÛ L·szlÛ	1899	1985
-20	G·bor DÈnes	1900	1979
-75	Vecsei GÈza	1902	1960
-77	Wigner Jenı	1902	1995
-22	Gerı Lor·nd	1910	1945
-24	Greguss P·l	1921	2003
-58	Roska Tam·s	1940	
-19	Ganz ¡brah·m	1814	1867
-13	Csonka J·nos	1852	1939
-53	Poll·k Antal	1865	1943
-35	KandÛ K·lm·n	1869	1931
-76	Vir·g JÛzsef	1870	1901
-36	K·rm·n TÛdor	1881	1963
-46	Mih·ly DÈnes	1894	1953
-71	Telkes M·ria	1900	1995
+6	B√°rczy P√°l	1941	
+5	B√°nki Don√°t	1859	1922
+33	Just S√°ndor	1874	1937
+52	Pog√°ny B√©la	1887	1943
+21	G√°sp√°r B√©la	1898	1973
+68	Szil√°rd Le√≥	1898	1964
+79	B√≠r√≥ L√°szl√≥	1899	1985
+20	G√°bor D√©nes	1900	1979
+75	Vecsei G√©za	1902	1960
+77	Wigner Jen≈ë	1902	1995
+22	Ger≈ë Lor√°nd	1910	1945
+24	Greguss P√°l	1921	2003
+58	Roska Tam√°s	1940	
+19	Ganz √Åbrah√°m	1814	1867
+13	Csonka J√°nos	1852	1939
+53	Poll√°k Antal	1865	1943
+35	Kand√≥ K√°lm√°n	1869	1931
+76	Vir√°g J√≥zsef	1870	1901
+36	K√°rm√°n T√≥dor	1881	1963
+46	Mih√°ly D√©nes	1894	1953
+71	Telkes M√°ria	1900	1995
 45	Mondl Ferenc	1902	1964
-59	Schmid Rezsı	1904	1943
-17	ForgÛ L·szlÛ	1907	1980
-41	K¸rti MiklÛs	1908	1999
-66	SzabÛ Istv·n	1910	1997
-11	BudÛ ¡goston	1914	1969
-65	SzabÛ Istv·n	1941	
-70	Szıcs Istv·n	1943	
-42	Landy KornÈl	1948	
+59	Schmid Rezs≈ë	1904	1943
+17	Forg√≥ L√°szl√≥	1907	1980
+41	K√ºrti Mikl√≥s	1908	1999
+66	Szab√≥ Istv√°n	1910	1997
+11	Bud√≥ √Ågoston	1914	1969
+65	Szab√≥ Istv√°n	1941	
+70	Sz≈ëcs Istv√°n	1943	
+42	Landy Korn√©l	1948	
 2	Balogh Tibor	1956	
 63	Somogyi Adolf	1846	1919
 7	Bermann Miksa	1861	1925
 38	Kerpely Antal	1866	1917
-27	HankÛczy Jenˆ	1879	1939
-62	Sklen·r J·nos	1884	1954
-12	Buz·gh Alad·r	1895	1962
-8	BÈkÈsy Gyˆrgy	1899	1972
-4	B·nhidi Antal	1902	1994
-15	Dulovits Jenı	1903	1972
-48	Neumann J·nos	1903	1957
-34	Kalm·r L·szlÛ	1905	1976
-30	Heller L·szlÛ	1907	1980
-67	Sziklay PÈter	1958	
-28	Heged˚s RamÛn	1982	
-51	Petzval JÛzsef	1807	1891
-55	Pusk·s Tivadar	1844	1893
+27	Hank√≥czy Jen√∂	1879	1939
+62	Sklen√°r J√°nos	1884	1954
+12	Buz√°gh Alad√°r	1895	1962
+8	B√©k√©sy Gy√∂rgy	1899	1972
+4	B√°nhidi Antal	1902	1994
+15	Dulovits Jen≈ë	1903	1972
+48	Neumann J√°nos	1903	1957
+34	Kalm√°r L√°szl√≥	1905	1976
+30	Heller L√°szl√≥	1907	1980
+67	Sziklay P√©ter	1958	
+28	Heged≈±s Ram√≥n	1982	
+51	Petzval J√≥zsef	1807	1891
+55	Pusk√°s Tivadar	1844	1893
 18	Frommer Rudolf	1868	1936
 26	Hanaman Ferenc	1878	1941
-47	Mih·lyi JÛzsef	1889	1978
-69	Szilvay KornÈl	1890	1957
-73	Tihanyi K·lm·n	1897	1947
-54	Pulv·ri K·roly	1907	1999
-61	Simonyi K·roly	1916	2001
-74	TÛfalvi Gyula 	1927	2003
+47	Mih√°lyi J√≥zsef	1889	1978
+69	Szilvay Korn√©l	1890	1957
+73	Tihanyi K√°lm√°n	1897	1947
+54	Pulv√°ri K√°roly	1907	1999
+61	Simonyi K√°roly	1916	2001
+74	T√≥falvi Gyula 	1927	2003
 50	Pavlics Ferenc	1928	
-44	Mechwart Andr·s	1834	1907
-57	Riszdorfer ÷dˆn	1893	1944
-64	Svachulay S·ndor	1875	1954
-43	Maderspach K·roly	1791	1849
-32	Jendrassik Gyˆrgy	1898	1954
-29	Hell JÛzsef K·roly	1713	1789
-31	Jedlik ¡nyos Istv·n	1800	1895
-78	Zipernowsky K·roly	1853	1942
-9	Bl·thy OttÛ Titusz	1860	1939
-49	Okolics·nyi Ferenc	1894	1954
-1	Ajtay Zolt·n Endre	1900	1983
-60	Segner J·nos Andr·s	1704	1777
-25	Haggenmacher K·roly	1835	1921
-37	KemÈny J·nos Gyˆrgy	1926	1992
-80	Szent-Gyˆrgyi Albert	1893	1986
-23	Goldmark PÈter K·roly	1906	1977
-39	Kˆszeghi-M·rtony K·roly	1783	1848
+44	Mechwart Andr√°s	1834	1907
+57	Riszdorfer √ñd√∂n	1893	1944
+64	Svachulay S√°ndor	1875	1954
+43	Maderspach K√°roly	1791	1849
+32	Jendrassik Gy√∂rgy	1898	1954
+29	Hell J√≥zsef K√°roly	1713	1789
+31	Jedlik √Ånyos Istv√°n	1800	1895
+78	Zipernowsky K√°roly	1853	1942
+9	Bl√°thy Ott√≥ Titusz	1860	1939
+49	Okolics√°nyi Ferenc	1894	1954
+1	Ajtay Zolt√°n Endre	1900	1983
+60	Segner J√°nos Andr√°s	1704	1777
+25	Haggenmacher K√°roly	1835	1921
+37	Kem√©ny J√°nos Gy√∂rgy	1926	1992
+80	Szent-Gy√∂rgyi Albert	1893	1986
+23	Goldmark P√©ter K√°roly	1906	1977
+39	K√∂szeghi-M√°rtony K√°roly	1783	1848
