@@ -9,11 +9,11 @@ use App\Models\InventionDto\InventionMinimalDto;
 
 interface InventionService
 {
-    public function findAll($page, $len) : array;
+    public function findAll($len) : array;
     public function findById(int $id, bool $isMinimal = false) : InventionResponseDto | InventionMinimalDto;
     public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20) : array;
 
-    public function create() : InventionResponseDto;
+    public function create(InventionRequestDto $dto) : InventionResponseDto;
     public function update(int $id, InventionRequestDto $dto) : InventionResponseDto;
     public function delete(int $id) : void;
 }

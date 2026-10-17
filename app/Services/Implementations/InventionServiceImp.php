@@ -3,57 +3,91 @@
 namespace App\Services\Implementations;
 
 use App\Models\Invention;
-use App\Models\InventionDto;
 use App\Models\InventionDto\InventionMinimalDto;
 use App\Models\InventionDto\InventionRequestDto;
 use App\Models\InventionDto\InventionResponseDto;
-use App\Services\InventionService;
 
 class InventionServiceImp implements InventionService
 {
 
-    public function findAll($page, $len): InventionResponseDto
+    public function findAll($len): array
     {
-        // TODO: Implement findAll() method.
+        $result = Invention::with("inventors")->paginate($len);
+        $result->setCollection(
+            $result->getCollection()->map(
+                fn (Invention $invention) => InventionServiceImp::toRespDto($invention)
+            )
+        );
+        return $result;
     }
 
     public function findById(int $id, bool $isMinimal = false): InventionResponseDto|InventionMinimalDto
     {
-        // TODO: Implement findById() method.
+        $invention = Invention::find($id);
+        if($isMinimal)
+            return InventionServiceImp::toMinDto($invention);
+        return InventionServiceImp::toRespDto($invention);
     }
 
-    public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20): InventionResponseDto|InventionMinimalDto
+    public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20): array
     {
-        // TODO: Implement fingAllByName() method.
+        $inventions = Invention::where("name", "like", "%".$name."%")->limit($limit)->get();
+        if($isMinimal)
+            return $inventions->map(
+                fn (Invention $invention) => InventionServiceImp::toMinDto($invention)
+            )->toArray();
+        return $inventions->map(
+            fn (Invention $invention) => InventorServiceImp::toRespDto($invention)
+        )->toArray();
     }
 
-    public function create(): InventionResponseDto
+    public function create(InventionRequestDto $dto): InventionResponseDto
     {
-        // TODO: Implement create() method.
+        $invention = Invention::create(compact($dto));
+        return InventionServiceImp::toRespDto($invention);
     }
 
     public function update(int $id, InventionRequestDto $dto): InventionResponseDto
     {
-        // TODO: Implement update() method.
+        $invention = Invention::find($id);
+        $invention->update(compact($dto));
+        return InventionServiceImp::toRespDto($invention);
     }
 
     public function delete(int $id): void
     {
-        // TODO: Implement delete() method.
+        $invention = Invention::findOrFail($id);
+        $invention->delete();
     }
 
-    public function toReqDto(Invention $invention): InventionRequestDto
+    public static function toReqDto(Invention $invention): InventionRequestDto
     {
-        // TODO: Implement toReqDto() method.
+        return new InventionRequestDto(
+            $invention->name,
+            array_map(
+                fn($inventor) => $inventor->id,
+                $invention->inventors
+            )
+        );
     }
 
-    public function toRespDto(Invention $invention): InventionResponseDto
+    public static function toRespDto(Invention $invention): InventionResponseDto
     {
-        // TODO: Implement toRespDto() method.
+        return new InventionResponseDto(
+            $invention->id,
+            $invention->name,
+            array_map(
+                fn($inventor) => InventorServiceImp::toMinDto($inventor),
+                $invention->inventors
+            )
+        );
     }
 
-    public function toMinDto(Invention $invention): InventionMinimalDto
+    public static function toMinDto(Invention $invention): InventionMinimalDto
     {
-        // TODO: Implement toMinDto() method.
+        return new InventionMinimalDto(
+            $invention->id,
+            $invention->name
+        );
     }
 }
