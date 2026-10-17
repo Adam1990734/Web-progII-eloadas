@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use \App\Services\InventorService;
 use \App\Services\InventionService;
+use App\Services\MessageService;
 use \App\Services\Implementations;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             InventorService::class,
             Implementations\InventorServiceImp::class
+        );
+        $this->app->bind(
+            MessageService::class,
+            Implementations\MessageServiceImp::class
         );
     }
 

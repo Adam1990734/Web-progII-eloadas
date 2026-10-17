@@ -15,8 +15,14 @@ class MessageResponseDto implements MessageDto
         public readonly string $userName
     ){}
 
-    public static function fromArray()
+    public static function fromArray(array $message): MessageResponseDto
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            (int) $message["id"],
+            $message["content"],
+            $message["createdAt"],
+            (int) $message["userId"],
+            $message["userName"]
+        );
     }
 }

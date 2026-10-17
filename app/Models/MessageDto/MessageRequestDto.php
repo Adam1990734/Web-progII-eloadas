@@ -9,8 +9,11 @@ class MessageRequestDto implements MessageDto
         public readonly int $userId
     ){}
 
-    public static function fromArray()
+    public static function fromArray(array $message)
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            $message["content"],
+            (int) $message["userId"]
+        );
     }
 }
