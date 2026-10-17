@@ -4,5 +4,5 @@ namespace App\Models\InventionDto;
 
 interface InventionDto
 {
-    public function fromArray(array $inventor);
+    public static function fromArray(array $inventor);
 }

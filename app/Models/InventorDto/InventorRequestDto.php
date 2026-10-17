@@ -12,7 +12,7 @@ class InventorRequestDto implements InventorDto
         public array $inventions
     ){}
 
-    public function fromArray(array $inventor): InventorRequestDto
+    public static function fromArray(array $inventor): InventorRequestDto
     {
         return new self(
             $inventor["name"],

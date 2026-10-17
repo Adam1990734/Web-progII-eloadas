@@ -13,7 +13,7 @@ class InventorResponseDto implements InventorDto
         public readonly array $inventions
     ){}
 
-    public function fromArray(array $inventor)
+    public static function fromArray(array $inventor): InventorResponseDto
     {
         return new self(
             (int) $inventor["id"],

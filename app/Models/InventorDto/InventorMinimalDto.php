@@ -9,7 +9,7 @@ class InventorMinimalDto implements InventorDto
         public readonly string $name
     ){}
 
-    public function fromArray(array $inventor): InventorMinimalDto
+    public static function fromArray(array $inventor): InventorMinimalDto
     {
         return new self(
             (int) $inventor["id"],
