@@ -2,7 +2,7 @@
 
 namespace App\Models\InventorDto;
 
-class InventorRequestDto
+class InventorRequestDto implements InventorDto
 {
     public function __construct(
         public string $name,
@@ -11,4 +11,14 @@ class InventorRequestDto
         //itt csak id-t kap vissza
         public array $inventions
     ){}
+
+    public function fromArray(array $inventor): InventorRequestDto
+    {
+        return new self(
+            $inventor["name"],
+            $inventor["bornat"],
+            $inventor["diedat"],
+            $inventor["inventions"]
+        );
+    }
 }

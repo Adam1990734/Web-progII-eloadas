@@ -2,9 +2,7 @@
 
 namespace App\Models\InventionDto;
 
-use App\Models\Inventor;
-
-class InventionResponseDto
+class InventionResponseDto implements InventionDto
 {
     public function __construct(
         public readonly int $id,
@@ -12,4 +10,13 @@ class InventionResponseDto
         //Inventor minimal-ok listája
         public readonly array $inventors
     ){}
+
+    public function fromArray(array $inventor): InventionResponseDto
+    {
+        return new self(
+            (int) $inventor["id"],
+            $inventor["name"],
+            $inventor["inventors"]
+        );
+    }
 }
