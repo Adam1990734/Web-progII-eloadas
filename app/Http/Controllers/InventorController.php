@@ -8,6 +8,7 @@ use App\Models\InventorDto\InventorResponseDto;
 use App\Models\InventorDto\InventorMinimalDto;
 use App\Services\InventorService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class InventorController extends Controller
 {
@@ -17,42 +18,48 @@ class InventorController extends Controller
 
     public function index()
     {
-        return Inventor::all();
+        return response()->json(
+            $this->inventorService->findAll(25)
+        );
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $data = $request->validate([
+        $inventor = InventorRequestDto::fromArray($request->validate([
             'name' => ['required', "max:40"],
             'bornat' => ['required', 'integer'],
-            'diedat' => ['nullable', 'integer'],
-        ]);
-
-        return Inventor::create($data);
+            'diedat' => ['integer'],
+            'inventions' => ['array']
+        ]));
+        return response()->json(
+            $this->inventorService->create($inventor),
+            Response::HTTP_CREATED
+        );
     }
 
-    public function show(Inventor $inventor)
+    public function details(int $id)
     {
-        return $inventor;
+        $inventor = $this->inventorService->findById($id);
+        return response()->json(
+            $inventor
+        );
     }
 
-    public function update(Request $request, Inventor $inventor)
+    public function update(int $id, Request $request)
     {
-        $data = $request->validate([
+        $inventor = InventorRequestDto::fromArray($request->validate([
             'name' => ['required', "max:40"],
             'bornat' => ['required', 'integer'],
-            'diedat' => ['nullable', 'integer'],
-        ]);
-
-        $inventor->update($data);
-
-        return $inventor;
+            'diedat' => ['integer'],
+            'inventions.*' => ['integer']
+        ]));
+        $this->inventorService->update($id, $inventor);
+        return response()->noContent();
     }
 
-    public function destroy(Inventor $inventor)
+    public function delete(int $id)
     {
-        $inventor->delete();
-
-        return response()->json();
+        $this->inventorService->delete($id);
+        return response()->noContent();
     }
 }

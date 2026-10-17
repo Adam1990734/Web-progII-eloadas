@@ -8,6 +8,7 @@ use App\Models\InventionDto\InventionResponseDto;
 use App\Models\InventionDto\InventionMinimalDto;
 use App\Services\InventionService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class InventionController extends Controller
 {
@@ -17,38 +18,42 @@ class InventionController extends Controller
 
     public function index()
     {
-        return Invention::all();
+        return response()->json(
+            $this->inventionService->findAll(25)
+        );
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', "max:80"],
-        ]);
-
-        return Invention::create($data);
+        $invention = InventionRequestDto::fromArray($request->validate([
+            'name' => ['required', "max:80"]
+        ]));
+        return response()->json(
+            $this->inventionService->create($invention),
+            Response::HTTP_CREATED
+        );
     }
 
-    public function show(Invention $invention)
+    public function details(int $id)
     {
-        return $invention;
+        $invention = $this->inventionService->findById($id);
+        return response()->json(
+            $invention
+        );
     }
 
-    public function update(Request $request, Invention $invention)
+    public function update(int $id, Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', "max:80"],
-        ]);
-
-        $invention->update($data);
-
-        return $invention;
+        $invention = InventionRequestDto::fromArray($request->validate([
+            'name' => ['required', "max:80"]
+        ]));
+        $this->inventionService->update($id, $invention);
+        return response()->noContent();
     }
 
-    public function destroy(Invention $invention)
+    public function delete(int $id)
     {
-        $invention->delete();
-
-        return response()->json();
+        $this->inventionService->delete($id);
+        return response()->noContent();
     }
 }

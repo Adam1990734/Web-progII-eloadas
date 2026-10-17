@@ -63,11 +63,7 @@ class InventionServiceImp implements InventionService
     public static function toReqDto(Invention $invention): InventionRequestDto
     {
         return new InventionRequestDto(
-            $invention->name,
-            array_map(
-                fn($inventor) => $inventor->id,
-                $invention->inventors
-            )
+            $invention->name
         );
     }
 
