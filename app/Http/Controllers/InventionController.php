@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invention;
+use App\Models\InventionDto\InventionRequestDto;
+use App\Models\InventionDto\InventionResponseDto;
+use App\Models\InventionDto\InventionMinimalDto;
+use App\Services\InventionService;
 use Illuminate\Http\Request;
 
 class InventionController extends Controller
 {
+    public function __construct(
+        private readonly InventionService $inventionService
+    ){}
+
     public function index()
     {
         return Invention::all();

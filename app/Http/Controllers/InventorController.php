@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventor;
+use App\Models\InventorDto\InventorRequestDto;
+use App\Models\InventorDto\InventorResponseDto;
+use App\Models\InventorDto\InventorMinimalDto;
+use App\Services\InventorService;
 use Illuminate\Http\Request;
 
 class InventorController extends Controller
 {
+    public function __construct(
+        private readonly InventorService $inventorService
+    ){}
+
     public function index()
     {
         return Inventor::all();
