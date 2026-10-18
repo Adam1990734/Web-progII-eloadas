@@ -40,3 +40,12 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+//Saját modell és kiegészített típusok:
+import { Inventor, InventorMinimal, InventorSimple } from '@/types/inventor';
+import { Invention, InventionMinimal, InventionSimple } from '@/types/invention';
+import { Message, MessageSimple } from '@/types/message';
+
+export type { Inventor, InventorMinimal, InventorSimple };
+export type { Invention, InventionMinimal, InventionSimple };
+export type { Message, MessageSimple };
