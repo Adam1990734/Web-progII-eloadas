@@ -16,6 +16,9 @@ class Inventor extends Model
 
     public function inventions()
     {
-        return $this->belongsToMany(Invention::class);
+        return $this->belongsToMany(
+            Invention::class,
+            "inventor_invention"
+        );
     }
 }

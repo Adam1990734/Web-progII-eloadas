@@ -16,10 +16,13 @@ class InventionController extends Controller
         private readonly InventionService $inventionService
     ){}
 
-    public function index()
+    public function index(Request $request)
     {
         return response()->json(
-            $this->inventionService->findAll(25)
+            $this->inventionService->findAll(
+                25,
+                $request->query("page", 1)
+            )
         );
     }
 

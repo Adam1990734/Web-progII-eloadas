@@ -2,6 +2,7 @@
 
 namespace App\Services\Implementations;
 
+use App\Services\InventionService;
 use App\Models\Invention;
 use App\Models\InventionDto\InventionMinimalDto;
 use App\Models\InventionDto\InventionRequestDto;
@@ -10,15 +11,15 @@ use App\Models\InventionDto\InventionResponseDto;
 class InventionServiceImp implements InventionService
 {
 
-    public function findAll($len): array
+    public function findAll(int $len, int $page): array
     {
-        $result = Invention::with("inventors")->paginate($len);
+        $result = Invention::with("inventors")->paginate(perPage: $len, page: $page);
         $result->setCollection(
             $result->getCollection()->map(
                 fn (Invention $invention) => InventionServiceImp::toRespDto($invention)
             )
         );
-        return $result;
+        return $result->toArray();
     }
 
     public function findById(int $id, bool $isMinimal = false): InventionResponseDto|InventionMinimalDto
@@ -29,7 +30,7 @@ class InventionServiceImp implements InventionService
         return InventionServiceImp::toRespDto($invention);
     }
 
-    public function fingAllByName(string $name, bool $isMinimal = false, int $limit = 20): array
+    public function findAllByName(string $name, bool $isMinimal = false, int $limit = 20): array
     {
         $inventions = Invention::where("name", "like", "%".$name."%")->limit($limit)->get();
         if($isMinimal)
@@ -37,7 +38,7 @@ class InventionServiceImp implements InventionService
                 fn (Invention $invention) => InventionServiceImp::toMinDto($invention)
             )->toArray();
         return $inventions->map(
-            fn (Invention $invention) => InventorServiceImp::toRespDto($invention)
+            fn (Invention $invention) => InventionServiceImp::toRespDto($invention)
         )->toArray();
     }
 
@@ -72,10 +73,9 @@ class InventionServiceImp implements InventionService
         return new InventionResponseDto(
             $invention->id,
             $invention->name,
-            array_map(
-                fn($inventor) => InventorServiceImp::toMinDto($inventor),
-                $invention->inventors
-            )
+            $invention->inventors->map(
+                fn($inventor) => InventorServiceImp::toMinDto($inventor)
+            )->toArray()
         );
     }
 

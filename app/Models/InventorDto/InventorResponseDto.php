@@ -8,7 +8,7 @@ class InventorResponseDto implements InventorDto
         public readonly int $id,
         public readonly string $name,
         public readonly int $bornat,
-        public readonly int $diedat,
+        public readonly int|null $diedat,
         //Itt minimal-t ad vissza
         public readonly array $inventions
     ){}

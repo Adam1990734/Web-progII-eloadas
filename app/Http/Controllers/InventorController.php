@@ -16,10 +16,13 @@ class InventorController extends Controller
         private readonly InventorService $inventorService
     ){}
 
-    public function index()
+    public function index(Request $request)
     {
         return response()->json(
-            $this->inventorService->findAll(25)
+            $this->inventorService->findAll(
+                25,
+                $request->query("page", 1)
+            )
         );
     }
 
