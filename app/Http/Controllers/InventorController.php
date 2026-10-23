@@ -43,6 +43,8 @@ class InventorController extends Controller
     public function details(int $id)
     {
         $inventor = $this->inventorService->findById($id);
+        if($inventor === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->json(
             $inventor
         );
@@ -54,15 +56,20 @@ class InventorController extends Controller
             'name' => ['required', "max:40"],
             'bornat' => ['required', 'integer'],
             'diedat' => ['integer'],
-            'inventions.*' => ['integer']
+            'inventions' => ['required', 'array'],
+            'inventions.*' => ['required', 'integer']
         ]));
-        $this->inventorService->update($id, $inventor);
+        $inventor = $this->inventorService->update($id, $inventor);
+        if($inventor === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
 
     public function delete(int $id)
     {
-        $this->inventorService->delete($id);
+        $inventor = $this->inventorService->delete($id);
+        if($inventor === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
 }

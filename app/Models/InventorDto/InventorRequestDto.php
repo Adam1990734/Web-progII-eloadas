@@ -17,7 +17,7 @@ class InventorRequestDto implements InventorDto
         return new self(
             $inventor["name"],
             $inventor["bornat"],
-            $inventor["diedat"],
+            $inventor["diedat"] ?? null,
             $inventor["inventions"]
         );
     }

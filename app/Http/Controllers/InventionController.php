@@ -40,6 +40,8 @@ class InventionController extends Controller
     public function details(int $id)
     {
         $invention = $this->inventionService->findById($id);
+        if($invention === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->json(
             $invention
         );
@@ -50,13 +52,17 @@ class InventionController extends Controller
         $invention = InventionRequestDto::fromArray($request->validate([
             'name' => ['required', "max:80"]
         ]));
-        $this->inventionService->update($id, $invention);
+        $invention = $this->inventionService->update($id, $invention);
+        if($invention === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
 
     public function delete(int $id)
     {
-        $this->inventionService->delete($id);
+        $invention = $this->inventionService->delete($id);
+        if($invention === null)
+            return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
 }

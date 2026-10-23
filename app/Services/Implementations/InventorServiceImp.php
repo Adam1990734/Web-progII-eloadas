@@ -22,9 +22,11 @@ class InventorServiceImp implements InventorService
         return $result->toArray();
     }
 
-    public function findById(int $id, bool $isMinimal = false): InventorResponseDto|InventorMinimalDto
+    public function findById(int $id, bool $isMinimal = false): InventorResponseDto | InventorMinimalDto| null
     {
         $inventor = Inventor::find($id);
+        if($inventor === null)
+            return null;
         if($isMinimal)
             return InventorServiceImp::toMinDto($inventor);
         return InventorServiceImp::toRespDto($inventor);
@@ -44,21 +46,26 @@ class InventorServiceImp implements InventorService
 
     public function create(InventorRequestDto $dto): InventorResponseDto
     {
-        $inventor = Inventor::create(compact($dto));
+        $inventor = Inventor::create(get_object_vars($dto));
         return InventorServiceImp::toRespDto($inventor);
     }
 
-    public function update(int $id, InventorRequestDto $dto): InventorResponseDto
+    public function update(int $id, InventorRequestDto $dto): InventorResponseDto | null
     {
         $inventor = Inventor::find($id);
-        $inventor->update(compact($dto));
+        if($inventor === null)
+            return null;
+        $inventor->update(get_object_vars($dto));
         return InventorServiceImp::toRespDto($inventor);
     }
 
-    public function delete(int $id): void
+    public function delete(int $id): InventorResponseDto | null
     {
-        $inventor = Inventor::findOrFail($id);
+        $inventor = Inventor::find($id);
+        if($inventor === null)
+            return null;
         $inventor->delete();
+        return InventorServiceImp::toRespDto($inventor);
     }
 
     public static function toReqDto(Inventor $inventor): InventorRequestDto

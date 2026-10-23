@@ -11,8 +11,8 @@ class MessageResponseDto implements MessageDto
         public readonly int $id,
         public readonly string $content,
         public readonly DateTime $createdAt,
-        public readonly int $userId,
-        public readonly string $userName
+        public readonly int|null $user_id,
+        public readonly string|null $userName
     ){}
 
     public static function fromArray(array $message): MessageResponseDto
@@ -21,8 +21,8 @@ class MessageResponseDto implements MessageDto
             (int) $message["id"],
             $message["content"],
             $message["createdAt"],
-            (int) $message["userId"],
-            $message["userName"]
+            $message["user_id"] ?? null,
+            $message["userName"] ?? null
         );
     }
 }

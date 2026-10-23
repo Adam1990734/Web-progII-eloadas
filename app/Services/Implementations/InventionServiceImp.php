@@ -22,9 +22,11 @@ class InventionServiceImp implements InventionService
         return $result->toArray();
     }
 
-    public function findById(int $id, bool $isMinimal = false): InventionResponseDto|InventionMinimalDto
+    public function findById(int $id, bool $isMinimal = false): InventionResponseDto | InventionMinimalDto | null
     {
         $invention = Invention::find($id);
+        if($invention === null)
+            return null;
         if($isMinimal)
             return InventionServiceImp::toMinDto($invention);
         return InventionServiceImp::toRespDto($invention);
@@ -44,21 +46,26 @@ class InventionServiceImp implements InventionService
 
     public function create(InventionRequestDto $dto): InventionResponseDto
     {
-        $invention = Invention::create(compact($dto));
+        $invention = Invention::create(get_object_vars($dto));
         return InventionServiceImp::toRespDto($invention);
     }
 
-    public function update(int $id, InventionRequestDto $dto): InventionResponseDto
+    public function update(int $id, InventionRequestDto $dto): InventionResponseDto | null
     {
         $invention = Invention::find($id);
-        $invention->update(compact($dto));
+        if($invention === null)
+            return null;
+        $invention->update(get_object_vars($dto));
         return InventionServiceImp::toRespDto($invention);
     }
 
-    public function delete(int $id): void
+    public function delete(int $id): InventionResponseDto|null
     {
-        $invention = Invention::findOrFail($id);
+        $invention = Invention::find($id);
+        if($invention === null)
+            return null;
         $invention->delete();
+        return InventionServiceImp::toRespDto($invention);
     }
 
     public static function toReqDto(Invention $invention): InventionRequestDto

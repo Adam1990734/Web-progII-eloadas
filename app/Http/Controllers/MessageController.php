@@ -14,19 +14,23 @@ class MessageController extends Controller
         private readonly MessageService $messageService
     ){}
 
-    public function index()
+    public function index(Request $request)
     {
         return response()->json(
-            $this->messageService->findAll(25)
+            $this->messageService->findAll(
+                25,
+                $request->query("page", 1)
+            )
         );
     }
 
     public function create(Request $request)
     {
-        $message = MessageRequestDto::fromArray($request->validate([
+        $messageData = $request->validate([
             'content' => ['required', "max:500"]
-        ]));
-        //ide még kell az id a message-be!
+        ]);
+        $messageData['user_id'] = $request->user() !== null ? $request->user()->id : null;
+        $message = MessageRequestDto::fromArray($messageData);
         return response()->json(
             $this->messageService->create($message),
             Response::HTTP_CREATED

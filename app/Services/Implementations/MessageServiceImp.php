@@ -9,20 +9,20 @@ use App\Services\MessageService;
 
 class MessageServiceImp implements MessageService
 {
-    public function findAll($len): array
+    public function findAll($len, $page): array
     {
-        $result = Message::with("user")->paginate($len);
+        $result = Message::with("user")->paginate(perPage: $len, page: $page);
         $result->setCollection(
             $result->getCollection()->map(
                 fn (Message $message) => MessageServiceImp::toRespDto($message)
             )
         );
-        return $result;
+        return $result->toArray();
     }
 
     public function create(MessageRequestDto $dto): MessageResponseDto
     {
-        $message = Message::create(compact($dto));
+        $message = Message::create(get_object_vars($dto));
         return MessageServiceImp::toRespDto($message);
     }
 
@@ -35,12 +35,12 @@ class MessageServiceImp implements MessageService
     }
     public function toRespDto(Message $message) : MessageResponseDto
     {
-        return  new MessageResponseDto(
+        return new MessageResponseDto(
             $message->id,
             $message->content,
             $message->created_at->toDateTime(),
             $message->user_id,
-            $message->user->name
+            $message->user->name ?? null
         );
     }
 }

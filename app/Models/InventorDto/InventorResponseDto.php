@@ -18,8 +18,8 @@ class InventorResponseDto implements InventorDto
         return new self(
             (int) $inventor["id"],
             $inventor["name"],
-            $inventor["diedat"],
-            $inventor["inventions"],
+            $inventor["bornat"],
+            $inventor["diedat"] ?? null,
             $inventor["inventions"]
         );
     }
