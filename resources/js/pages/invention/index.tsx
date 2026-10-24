@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Invention } from '@/types';
-import Table from '@/components/shared/table';
 import { InventionWithoutType } from '@/types/invention';
+import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 
-export default function invention() {
+export default function index() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [inventions, setInventions] = useState<Invention[]>([]);
     // eslint-disable-next-line react-hooks/rules-of-hooks

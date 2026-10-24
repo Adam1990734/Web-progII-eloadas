@@ -11,8 +11,8 @@ export default function InventorRow({ inventor, isComplex }: Props) {
             {isComplex ? (
                 <tr>
                     <td>{inventor.name}</td>
-                    <td>{inventor.bornAt}</td>
-                    <td>{inventor.diedAt ? inventor.diedAt : '-'}</td>
+                    <td>{inventor.bornat}</td>
+                    <td>{inventor.diedat ? inventor.diedat : '-'}</td>
                     <td>
                         <ul>
                             {inventor.inventions.map((invention, id) => (
@@ -24,8 +24,8 @@ export default function InventorRow({ inventor, isComplex }: Props) {
             ) : (
                 <tr>
                     <td>{inventor.name}</td>
-                    <td>{inventor.bornAt}</td>
-                    <td>{inventor.diedAt ? inventor.diedAt : '-'}</td>
+                    <td>{inventor.bornat}</td>
+                    <td>{inventor.diedat ? inventor.diedat : '-'}</td>
                 </tr>
             )}
         </>

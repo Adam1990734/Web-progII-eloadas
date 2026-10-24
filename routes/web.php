@@ -21,3 +21,5 @@ require __DIR__.'/rest/message.php';
 
 //React page-ek:
 require __DIR__.'/crud/inventions.php';
+require __DIR__.'/crud/inventors.php';
+require __DIR__.'/crud/messages.php';

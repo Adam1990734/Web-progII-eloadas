@@ -3,16 +3,16 @@ export interface Inventor {
     type: "Inventor";
     id: number;
     name: string;
-    bornAt: number;
-    diedAt: number | null;
+    bornat: number;
+    diedat: number | null;
     inventions: InventionMinimal[];
 }
 
 export interface InventorWithoutType {
     id: number;
     name: string;
-    bornAt: number;
-    diedAt: number | null;
+    bornat: number;
+    diedat: number | null;
     inventions: InventionMinimal[];
 }
 
@@ -25,6 +25,6 @@ export interface InventorMinimal {
 export interface InventorSimple {
     type: "InventorSimple"
     name: string;
-    bornAt: number;
-    diedAt: number | null;
+    bornat: number;
+    diedat: number | null;
 }
