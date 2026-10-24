@@ -9,14 +9,10 @@ type Props = {
 }
 
 export default function Delete({ id } : Props) {
-    const inventionRef = useRef<InventionRequest>({
-        name: ''
-    });
     const [invention, setInvention] = useState<InventionRequest | null>(null);
     useEffect(() => {
         axios.get<InventionResponse>(`/api/inventions/${id}`)
             .then(resp => {
-                inventionRef.current.name = resp.data.name;
                 setInvention({
                     ...resp.data
                 })
@@ -26,7 +22,7 @@ export default function Delete({ id } : Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.delete<InventionResponse>(`/api/inventions/delete/${id}`);
+        const resp = await axios.delete(`/api/inventions/delete/${id}`);
         setResult(resp.status);
     };
 
@@ -45,8 +41,7 @@ export default function Delete({ id } : Props) {
             >
                 <Input
                     type={'text'}
-                    defaultValue={inventionRef.current.name ?? ''}
-                    onChange={(e) => (inventionRef.current.name = e.currentTarget.value)}
+                    defaultValue={invention?.name ?? ''}
                     required={true}
                     disabled={true}
                 />

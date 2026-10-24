@@ -1,9 +1,8 @@
-import { Form } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRef, useState } from 'react';
 import axios from 'axios';
-import { InventionRequest, InventionResponse, Invention } from '@/types/invention';
+import { InventionRequest, InventionResponse } from '@/types/invention';
 
 export default function Create() {
     const invention = useRef<InventionRequest>({
@@ -18,7 +17,7 @@ export default function Create() {
     });
     const onSubmit = async () => {
         const resp = await axios.post<InventionResponse>('/api/inventions/create', {
-            name: invention.current.name,
+            ...invention.current
         });
         setResult({
             status: resp.status,
@@ -30,7 +29,7 @@ export default function Create() {
         <>
             {result.status !== 0 && result.new && (
                 <>
-                    <span>The inventions is created!</span>
+                    <span>The invention is created!</span>
                 </>
             )}
             <form

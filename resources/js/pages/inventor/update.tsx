@@ -1,36 +1,76 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Inventor } from '@/types';
-import { Form } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
-import { InventorWithoutType } from '@/types/inventor';
+import { InventorResponse, InventorRequest, InventionMinimal } from '@/types';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 
 type Props = {
     id: number;
 };
 
 export default function Update({ id }: Props) {
-    const [inventor, setInventor] = useState<Inventor>();
-
+    const inventorRef = useRef<InventorRequest>({
+        name: '',
+        bornat: 0,
+        diedat: null,
+        inventions: []
+    });
+    const [inventor, setInventor] = useState<InventorResponse | null>(null);
     useEffect(() => {
-        fetch(`/api/inventors/${id}`)
-            .then((resp) => resp.json())
-            .then((data: InventorWithoutType) => {
-                setInventor({
-                    ...data,
-                    type: 'Inventor',
-                });
+        axios.get<InventorResponse>(`/api/inventors/${id}`).then((resp) => {
+            const { inventions, ...other } = resp.data;
+            inventorRef.current = {
+                ...other,
+                inventions: inventions.map((invention: InventionMinimal) : number => invention.id)
+            };
+            setInventor({
+                ...resp.data
             });
+        });
     }, []);
+
+    const [result, setResult] = useState<number>(0);
+    const onSubmit = async () => {
+        console.log(inventorRef.current);
+        const resp = await axios.put<InventorResponse>(`/api/inventors/update/${id}`, {
+            ...inventorRef.current
+        });
+        setResult(resp.status);
+    };
 
     return (
         <>
-            <Form action={`/api/inventors/update/${id}`} method={'PUT'}>
-                <Input type={'text'} name={'name'} defaultValue={inventor?.name ?? ''} required={true} />
-                <Input type={'text'} name={'bornat'} defaultValue={inventor?.bornat ?? ''} required={true} />
-                <Input type={'text'} name={'diedat'} defaultValue={inventor?.diedat ?? ''} required={true} />
-                <Button type={""}>Save</Button>
-            </Form>
+            {result !== 0 && result === 204 && (
+                <>
+                    <span>Successfully update!</span>
+                </>
+            )}
+            <form
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    await onSubmit();
+                }}
+            >
+                <Input
+                    type={'text'}
+                    defaultValue={inventor?.name ?? ''}
+                    onChange={(e) => (inventorRef.current.name = e.currentTarget.value)}
+                    required={true}
+                />
+                <Input
+                    type={'number'}
+                    defaultValue={inventor?.bornat ?? ''}
+                    onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))}
+                    required={true}
+                />
+                <Input
+                    type={'number'}
+                    defaultValue={inventor?.diedat ?? ''}
+                    onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
+                    required={false}
+                />
+                <Button type={'submit'}>Save</Button>
+            </form>
         </>
     );
 }

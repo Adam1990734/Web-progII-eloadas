@@ -55,7 +55,7 @@ class InventorController extends Controller
         $inventor = InventorRequestDto::fromArray($request->validate([
             'name' => ['required', "max:40"],
             'bornat' => ['required', 'integer'],
-            'diedat' => ['integer'],
+            'diedat' => ['integer', 'nullable'],
             'inventions' => ['required', 'array'],
             'inventions.*' => ['required', 'integer']
         ]));

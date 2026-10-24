@@ -25,7 +25,7 @@ export default function Update({ id }: Props) {
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
         const resp = await axios.put<InventionResponse>(`/api/inventions/update/${id}`, {
-            name: inventionRef.current.name
+            ...inventionRef.current
         });
         setResult(resp.status);
     };
@@ -38,7 +38,6 @@ export default function Update({ id }: Props) {
                 </>
             )}
             <form
-                action={`/api/inventions/update/${id}`}
                 onSubmit={async (e) => {
                     e.preventDefault();
                     await onSubmit();

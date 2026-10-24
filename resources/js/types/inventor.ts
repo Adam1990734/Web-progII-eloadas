@@ -25,4 +25,5 @@ export interface InventorRequest {
     name: string;
     bornat: number;
     diedat: number | null;
+    inventions: number[]
 }

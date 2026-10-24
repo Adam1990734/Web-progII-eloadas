@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Inventor } from '@/types';
-import { InventorWithoutType } from '@/types/inventor';
 import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
+import axios from 'axios';
 
 export default function index() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -13,13 +13,13 @@ export default function index() {
     const lastpage = useRef<number>(0);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        fetch(`/api/inventors?page=${page}`)
-            .then((resp) => resp.json())
+        axios.get(`/api/inventors?page=${page}`)
+            .then((data) => data.data)
             .then((data) => {
                 lastpage.current = data.last_page;
                 setInventors(
                     data.data.map(
-                        (obj: InventorWithoutType): Inventor => ({
+                        (obj: Inventor): Inventor => ({
                             ...obj,
                             type: 'Inventor',
                         }),
@@ -30,7 +30,9 @@ export default function index() {
 
     return (
         <>
-            <Table headerLabels={['name']} objectToMap={inventors} />
+            <Table headerLabels={[
+                'name', 'born in', 'died in'
+            ]} objectToMap={inventors} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current} />
         </>
     );

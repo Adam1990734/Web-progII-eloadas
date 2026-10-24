@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Inventor } from '@/types';
-import { InventorWithoutType } from '@/types/inventor';
+import { InventorResponse, InventorRequest, Inventor } from '@/types';
+import axios from 'axios';
 import InventorDetails from '@/components/inventor/inventor-details';
 
 type Props = {
@@ -11,23 +11,16 @@ export default function Details({ id } : Props) {
     const [inventor, setInventor] = useState<Inventor>();
 
     useEffect(() => {
-        fetch(`/api/inventors/${id}`)
-            .then(resp => resp.json())
-            .then((data : InventorWithoutType) => {
-                setInventor(({
+        axios
+            .get(`/api/inventors/${id}`)
+            .then((data) => data.data)
+            .then((data: InventorResponse) => {
+                setInventor({
                     ...data,
-                    type: "Inventor"
-                }))
+                    type: 'Inventor',
+                });
             });
     }, []);
 
-    return (
-        <>
-            { inventor ?
-                <InventorDetails inventor={inventor} isComplex={true}/>
-                :
-                <span>Hiba</span>
-            }
-        </>
-    );
+    return <>{inventor ? <InventorDetails inventor={inventor} isComplex={true} /> : <span>Hiba</span>}</>;
 }
