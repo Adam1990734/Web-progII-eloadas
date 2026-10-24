@@ -15,7 +15,7 @@ export interface Message {
     userName: string|null
 }
 
-export interface MessageWithoutType {
+export interface MessageResponse {
     id: number;
     content: string;
     createdAt: Date;
@@ -23,8 +23,7 @@ export interface MessageWithoutType {
     userName: string|null;
 }
 
-export interface MessageSimple {
-    type: "MessageSimple"
+export interface MessageRequest {
     content: string,
     createdAt: Date,
     connectedUser: User|null

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Invention } from '@/types';
-import { InventionWithoutType } from '@/types/invention';
 import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
+import axios from 'axios';
 
 export default function index() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -13,15 +13,17 @@ export default function index() {
     const lastpage = useRef<number>(0);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        fetch(`/api/inventions?page=${page}`)
-            .then((resp) => resp.json())
+        axios.get(`/api/inventions?page=${page}`)
+            .then(data => data.data)
             .then(data => {
                 lastpage.current = data.last_page;
                 setInventions(
-                    data.data.map((obj : InventionWithoutType): Invention => ({
-                        ...obj,
-                        type: "Invention"
-                    }))
+                    data.data.map(
+                        (obj: Invention): Invention => ({
+                            ...obj,
+                            type: 'Invention',
+                        }),
+                    )
                 );
             });
     }, [page]);

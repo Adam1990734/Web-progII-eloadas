@@ -23,6 +23,7 @@ function Header({ headerLabels } : HeaderProps) {
                 </th>
             ))
         }
+        <th>Operations</th>
     </tr></thead>
 }
 
@@ -34,7 +35,6 @@ function Body({ elements } : BodyProps) {
     return <tbody>
         {
             elements.map((obj, id) => {
-                console.log(obj);
                 switch (obj.type) {
                     case 'Invention':
                         return <InventionRow key={id} invention={obj} isComplex={false}/>;

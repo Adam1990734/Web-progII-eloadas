@@ -42,10 +42,10 @@ export interface User {
 }
 
 //Saját modell és kiegészített típusok:
-import { Inventor, InventorMinimal, InventorSimple } from '@/types/inventor';
-import { Invention, InventionMinimal, InventionSimple } from '@/types/invention';
-import { Message, MessageSimple } from '@/types/message';
+import { Inventor, InventorMinimal, InventorRequest, InventorResponse } from '@/types/inventor';
+import { Invention, InventionMinimal, InventionRequest, InventionResponse } from '@/types/invention';
+import { Message, MessageRequest, MessageResponse } from '@/types/message';
 
-export type { Inventor, InventorMinimal, InventorSimple };
-export type { Invention, InventionMinimal, InventionSimple };
-export type { Message, MessageSimple };
+export type { Inventor, InventorMinimal, InventorRequest, InventorResponse };
+export type { Invention, InventionMinimal, InventionRequest, InventionResponse };
+export type { Message, MessageRequest, MessageResponse };

@@ -8,7 +8,7 @@ export interface Inventor {
     inventions: InventionMinimal[];
 }
 
-export interface InventorWithoutType {
+export interface InventorResponse {
     id: number;
     name: string;
     bornat: number;
@@ -17,13 +17,11 @@ export interface InventorWithoutType {
 }
 
 export interface InventorMinimal {
-    type: "InventorMinimal"
     id: number,
     name: string
 }
 
-export interface InventorSimple {
-    type: "InventorSimple"
+export interface InventorRequest {
     name: string;
     bornat: number;
     diedat: number | null;

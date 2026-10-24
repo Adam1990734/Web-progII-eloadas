@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Invention } from '@/types';
+import { Invention, InventionResponse } from '@/types';
 import InventionDetails from '@/components/invention/invention-details';
-import { InventionWithoutType } from '@/types/invention';
+import axios from 'axios';
 
 type Props = {
     id: number;
@@ -11,13 +11,13 @@ export default function Details({ id } : Props) {
     const [invention, setInvention] = useState<Invention>();
 
     useEffect(() => {
-        fetch(`/api/inventions/${id}`)
-            .then(resp => resp.json())
-            .then((data : InventionWithoutType) => {
-                setInvention(({
+        axios.get(`/api/inventions/${id}`)
+            .then(data => data.data)
+            .then((data: InventionResponse) => {
+                setInvention({
                     ...data,
-                    type: "Invention"
-                }))
+                    type: 'Invention',
+                });
             });
     }, []);
 

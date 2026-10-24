@@ -1,34 +1,57 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Invention } from '@/types';
-import { InventionWithoutType } from '@/types/invention';
-import { Form } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { InventionRequest, InventionResponse } from '@/types';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 
 type Props = {
     id: number;
 };
 
 export default function Update({ id }: Props) {
-    const [invention, setInvention] = useState<Invention>();
-
+    const inventionRef = useRef<InventionRequest>({
+        name: '',
+    });
+    const [invention, setInvention] = useState<InventionRequest | null>(null);
     useEffect(() => {
-        fetch(`/api/inventions/${id}`)
-            .then((resp) => resp.json())
-            .then((data: InventionWithoutType) => {
-                setInvention({
-                    ...data,
-                    type: 'Invention',
-                });
+        axios.get<InventionResponse>(`/api/inventions/${id}`).then((resp) => {
+            inventionRef.current.name = resp.data.name;
+            setInvention({
+                ...resp.data,
             });
+        });
     }, []);
+
+    const [result, setResult] = useState<number>(0);
+    const onSubmit = async () => {
+        const resp = await axios.put<InventionResponse>(`/api/inventions/update/${id}`, {
+            name: inventionRef.current.name
+        });
+        setResult(resp.status);
+    };
 
     return (
         <>
-            <Form action={`/api/inventions/update/${id}`} method={'PUT'}>
-                <Input type={'text'} name={'name'} defaultValue={invention?.name ?? ''} required={true} />
+            {result !== 0 && result === 204 && (
+                <>
+                    <span>Successfully update!</span>
+                </>
+            )}
+            <form
+                action={`/api/inventions/update/${id}`}
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    await onSubmit();
+                }}
+            >
+                <Input
+                    type={'text'}
+                    defaultValue={inventionRef.current.name ?? ''}
+                    onChange={(e) => (inventionRef.current.name = e.currentTarget.value)}
+                    required={true}
+                />
                 <Button type={'submit'}>Save</Button>
-            </Form>
+            </form>
         </>
     );
 }

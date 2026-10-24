@@ -7,19 +7,17 @@ export interface Invention {
     inventors: InventorMinimal[]
 }
 
-export interface InventionWithoutType {
+export interface InventionResponse {
     id: number;
     name: string;
     inventors: InventorMinimal[];
 }
 
 export interface InventionMinimal {
-    type: "InventionMinimal";
     id: number;
     name: string;
 }
 
-export interface InventionSimple {
-    type: "InventionSimple";
+export interface InventionRequest {
     name: string;
 }
