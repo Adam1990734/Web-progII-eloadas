@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { InventorResponse, InventorRequest, InventionMinimal } from '@/types';
+import { InventorResponse, InventorRequest, InventionMinimal, BreadcrumbItem } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
@@ -10,6 +10,21 @@ type Props = {
 };
 
 export default function Update({ id }: Props) {
+    const breadCrumbs: BreadcrumbItem[] = [
+        {
+            title: 'CRUD',
+            href: '/crud',
+        },
+        {
+            title: 'inventors',
+            href: '/crud/inventors',
+        },
+        {
+            title: 'create',
+            href: `/crud/inventors/update/${id}`,
+        },
+    ];
+
     const inventorRef = useRef<InventorRequest>({
         name: '',
         bornat: 0,
@@ -40,7 +55,7 @@ export default function Update({ id }: Props) {
     };
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {result === 204 && (
                 <>
                     <span>Successfully update!</span>

@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import { MessageRequest } from '@/types';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+
 export default function Create() {
     const contentRef = useRef<MessageRequest>({
         content: ""

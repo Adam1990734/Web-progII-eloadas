@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
-import { InventionRequest, InventionResponse } from '@/types';
+import { BreadcrumbItem, InventionRequest, InventionResponse } from '@/types';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
@@ -10,6 +10,21 @@ type Props = {
 }
 
 export default function Delete({ id } : Props) {
+    const breadCrumbs: BreadcrumbItem[] = [
+        {
+            title: 'CRUD',
+            href: '/crud',
+        },
+        {
+            title: 'inventions',
+            href: '/crud/inventions',
+        },
+        {
+            title: 'delete',
+            href: `/crud/inventions/delete/${id}`,
+        },
+    ];
+
     const [invention, setInvention] = useState<InventionRequest | null>(null);
     useEffect(() => {
         axios.get<InventionResponse>(`/api/inventions/${id}`)
@@ -28,7 +43,7 @@ export default function Delete({ id } : Props) {
     };
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {result === 204 && (
                 <>
                     <span>Successfully deletion!</span>

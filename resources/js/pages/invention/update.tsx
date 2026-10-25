@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { InventionRequest, InventionResponse } from '@/types';
+import { BreadcrumbItem, InventionRequest, InventionResponse } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
@@ -10,6 +10,21 @@ type Props = {
 };
 
 export default function Update({ id }: Props) {
+    const breadCrumbs: BreadcrumbItem[] = [
+        {
+            title: 'CRUD',
+            href: '/crud',
+        },
+        {
+            title: 'inventions',
+            href: '/crud/inventions',
+        },
+        {
+            title: 'update',
+            href: `/crud/inventions/delete${id}`,
+        },
+    ];
+
     const inventionRef = useRef<InventionRequest>({
         name: '',
     });
@@ -32,7 +47,7 @@ export default function Update({ id }: Props) {
     };
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {result === 204 && (
                 <>
                     <span>Successfully update!</span>

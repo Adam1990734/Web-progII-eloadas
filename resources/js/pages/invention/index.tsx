@@ -1,9 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import { Invention } from '@/types';
+import { BreadcrumbItem, Invention } from '@/types';
 import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+
+const breadCrumbs : BreadcrumbItem[] = [
+    {
+        title: "CRUD",
+        href: "/crud"
+    },
+    {
+        title: "inventions",
+        href: "/crud/inventions"
+    }
+];
 
 export default function index() {
     const [inventions, setInventions] = useState<Invention[]>([]);
@@ -26,7 +37,7 @@ export default function index() {
     }, [page]);
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             <Table headerLabels={['name']} objectToMap={inventions} hasOpertions={true} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current}/>
         </AppHeaderLayout>

@@ -1,9 +1,24 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { InventorRequest, InventorResponse } from '@/types';
+import { BreadcrumbItem, InventorRequest, InventorResponse } from '@/types';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+
+const breadCrumbs: BreadcrumbItem[] = [
+    {
+        title: 'CRUD',
+        href: '/crud',
+    },
+    {
+        title: 'inventors',
+        href: '/crud/inventors',
+    },
+    {
+        title: 'create',
+        href: '/crud/inventors/create',
+    },
+];
 
 export default function Create() {
     const inventorRef = useRef<InventorRequest>({
@@ -30,7 +45,7 @@ export default function Create() {
     };
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {result.status !== 201 && result.new && (
                 <>
                     <span>The inventor is created!</span>

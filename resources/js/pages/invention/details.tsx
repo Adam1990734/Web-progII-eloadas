@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Invention, InventionResponse } from '@/types';
+import { BreadcrumbItem, Invention, InventionResponse } from '@/types';
 import InventionDetails from '@/components/invention/invention-details';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
@@ -9,6 +9,21 @@ type Props = {
 };
 
 export default function Details({ id } : Props) {
+    const breadCrumbs: BreadcrumbItem[] = [
+        {
+            title: 'CRUD',
+            href: '/crud',
+        },
+        {
+            title: 'inventions',
+            href: '/crud/inventions',
+        },
+        {
+            title: 'details',
+            href: `/crud/inventions/${id}`,
+        },
+    ];
+
     const [invention, setInvention] = useState<Invention>();
 
     useEffect(() => {
@@ -23,7 +38,7 @@ export default function Details({ id } : Props) {
     }, []);
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             { invention ?
                 <InventionDetails invention={invention} isComplex={true} />
                 :

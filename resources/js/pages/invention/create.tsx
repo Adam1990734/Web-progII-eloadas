@@ -4,6 +4,22 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import { InventionRequest, InventionResponse } from '@/types/invention';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { BreadcrumbItem } from '@/types';
+
+const breadCrumbs: BreadcrumbItem[] = [
+    {
+        title: 'CRUD',
+        href: '/crud',
+    },
+    {
+        title: 'inventions',
+        href: '/crud/inventions',
+    },
+    {
+        title: 'create',
+        href: '/crud/inventions/create',
+    }
+];
 
 export default function Create() {
     const invention = useRef<InventionRequest>({
@@ -27,7 +43,7 @@ export default function Create() {
     }
 
     return (
-        <AppHeaderLayout>
+        <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {result.status === 201 && result.new && (
                 <>
                     <span>The invention is created!</span>

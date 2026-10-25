@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { InventorResponse, InventorRequest, Inventor } from '@/types';
+import { InventorResponse, InventorRequest, Inventor, BreadcrumbItem } from '@/types';
 import axios from 'axios';
 import InventorDetails from '@/components/inventor/inventor-details';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
@@ -9,6 +9,21 @@ type Props = {
 };
 
 export default function Details({ id } : Props) {
+    const breadCrumbs: BreadcrumbItem[] = [
+        {
+            title: 'CRUD',
+            href: '/crud',
+        },
+        {
+            title: 'inventors',
+            href: '/crud/inventors',
+        },
+        {
+            title: 'create',
+            href: `/crud/inventors/${id}`,
+        },
+    ];
+
     const [inventor, setInventor] = useState<Inventor>();
 
     useEffect(() => {
@@ -23,5 +38,5 @@ export default function Details({ id } : Props) {
             });
     }, []);
 
-    return <AppHeaderLayout>{inventor ? <InventorDetails inventor={inventor} isComplex={true} /> : <span>Hiba</span>}</AppHeaderLayout>;
+    return <AppHeaderLayout breadcrumbs={breadCrumbs}>{inventor ? <InventorDetails inventor={inventor} isComplex={true} /> : <span>Hiba</span>}</AppHeaderLayout>;
 }
