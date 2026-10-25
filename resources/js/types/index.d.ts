@@ -46,7 +46,9 @@ export interface User {
 import { Inventor, InventorMinimal, InventorRequest, InventorResponse } from '@/types/inventor';
 import { Invention, InventionMinimal, InventionRequest, InventionResponse } from '@/types/invention';
 import { Message, MessageRequest, MessageResponse } from '@/types/message';
+import { InventorAndInventionCount, InventorTimeLine } from '@/types/diagram';
 
 export type { Inventor, InventorMinimal, InventorRequest, InventorResponse };
 export type { Invention, InventionMinimal, InventionRequest, InventionResponse };
 export type { Message, MessageRequest, MessageResponse };
+export type { InventorAndInventionCount, InventorTimeLine };
