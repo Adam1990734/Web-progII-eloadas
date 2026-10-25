@@ -9,7 +9,7 @@ type Props = {
     id: number;
 };
 
-export default function Update({ id }: Props) {
+export default function InventorUpdateView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
             title: 'CRUD',

@@ -20,12 +20,12 @@ const breadCrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Create() {
+export default function InventorCreateView() {
     const inventorRef = useRef<InventorRequest>({
         name: '',
         bornat: 0,
         diedat: null,
-        inventions: []
+        inventions: [],
     });
     const [result, setResult] = useState<{
         status: number;
@@ -36,7 +36,7 @@ export default function Create() {
     });
     const onSubmit = async () => {
         const resp = await axios.post<InventorResponse>('/api/inventors/create', {
-            ...inventorRef.current
+            ...inventorRef.current,
         });
         setResult({
             status: resp.status,
@@ -61,10 +61,7 @@ export default function Create() {
                 <Input type={'number'} onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))} required={true} />
                 <Input
                     type={'number'}
-                    onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber)
-                        ? null
-                        : e.currentTarget.valueAsNumber
-                    )}
+                    onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
                     required={false}
                 />
                 <Button type={'submit'}>Add</Button>

@@ -9,7 +9,7 @@ type Props = {
     id: number
 }
 
-export default function Delete({ id } : Props) {
+export default function InventorDeleteView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
             title: 'CRUD',

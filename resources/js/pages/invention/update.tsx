@@ -9,7 +9,7 @@ type Props = {
     id: number;
 };
 
-export default function Update({ id }: Props) {
+export default function InventionUpdateView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
             title: 'CRUD',
@@ -41,7 +41,7 @@ export default function Update({ id }: Props) {
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
         const resp = await axios.put<InventionResponse>(`/api/inventions/update/${id}`, {
-            ...inventionRef.current
+            ...inventionRef.current,
         });
         setResult(resp.status);
     };

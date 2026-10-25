@@ -21,26 +21,26 @@ const breadCrumbs: BreadcrumbItem[] = [
     }
 ];
 
-export default function Create() {
+export default function InventionCreateView() {
     const invention = useRef<InventionRequest>({
         name: '',
     });
     const [result, setResult] = useState<{
-        status: number,
-        new: InventionResponse | null
+        status: number;
+        new: InventionResponse | null;
     }>({
         status: 0,
-        new: null
+        new: null,
     });
     const onSubmit = async () => {
         const resp = await axios.post<InventionResponse>('/api/inventions/create', {
-            ...invention.current
+            ...invention.current,
         });
         setResult({
             status: resp.status,
-            new: { ...resp.data }
+            new: { ...resp.data },
         });
-    }
+    };
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>

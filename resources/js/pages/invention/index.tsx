@@ -5,6 +5,10 @@ import Pager from '@/components/shared/pager';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
+type Props = {
+    hasOperations?: boolean
+}
+
 const breadCrumbs : BreadcrumbItem[] = [
     {
         title: "CRUD",
@@ -16,7 +20,7 @@ const breadCrumbs : BreadcrumbItem[] = [
     }
 ];
 
-export default function index() {
+export default function InventionIndexView({ hasOperations = true }: Props) {
     const [inventions, setInventions] = useState<Invention[]>([]);
     const [page, setPage] = useState<number>(1);
     const lastpage = useRef<number>(0);
@@ -38,7 +42,7 @@ export default function index() {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            <Table headerLabels={['name']} objectToMap={inventions} hasOpertions={true} />
+            <Table headerLabels={['name']} objectToMap={inventions} hasOperations={hasOperations} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current}/>
         </AppHeaderLayout>
     );

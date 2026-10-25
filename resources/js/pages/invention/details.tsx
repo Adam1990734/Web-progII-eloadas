@@ -8,7 +8,7 @@ type Props = {
     id: number;
 };
 
-export default function Details({ id } : Props) {
+export default function InventionDetailsView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
             title: 'CRUD',
@@ -27,8 +27,9 @@ export default function Details({ id } : Props) {
     const [invention, setInvention] = useState<Invention>();
 
     useEffect(() => {
-        axios.get(`/api/inventions/${id}`)
-            .then(data => data.data)
+        axios
+            .get(`/api/inventions/${id}`)
+            .then((data) => data.data)
             .then((data: InventionResponse) => {
                 setInvention({
                     ...data,
@@ -39,11 +40,7 @@ export default function Details({ id } : Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            { invention ?
-                <InventionDetails invention={invention} isComplex={true} />
-                :
-                <span>Hiba</span>
-            }
+            {invention ? <InventionDetails invention={invention} isComplex={true} /> : <span>Hiba</span>}
         </AppHeaderLayout>
     );
 }

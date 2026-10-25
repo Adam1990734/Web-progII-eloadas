@@ -9,7 +9,7 @@ type Props = {
     id: number
 }
 
-export default function Delete({ id } : Props) {
+export default function InventionDeleteView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
             title: 'CRUD',
@@ -27,14 +27,12 @@ export default function Delete({ id } : Props) {
 
     const [invention, setInvention] = useState<InventionRequest | null>(null);
     useEffect(() => {
-        axios.get<InventionResponse>(`/api/inventions/${id}`)
-            .then(resp => {
-                setInvention({
-                    ...resp.data
-                })
+        axios.get<InventionResponse>(`/api/inventions/${id}`).then((resp) => {
+            setInvention({
+                ...resp.data,
             });
+        });
     }, []);
-
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
@@ -55,12 +53,7 @@ export default function Delete({ id } : Props) {
                     await onSubmit();
                 }}
             >
-                <Input
-                    type={'text'}
-                    defaultValue={invention?.name ?? ''}
-                    required={true}
-                    disabled={true}
-                />
+                <Input type={'text'} defaultValue={invention?.name ?? ''} required={true} disabled={true} />
                 <Button type={'submit'}>Delete</Button>
             </form>
         </AppHeaderLayout>

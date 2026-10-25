@@ -5,7 +5,7 @@ import axios from 'axios';
 import { MessageRequest } from '@/types';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
-export default function Create() {
+export default function MessageCreateView() {
     const contentRef = useRef<MessageRequest>({
         content: ""
     });

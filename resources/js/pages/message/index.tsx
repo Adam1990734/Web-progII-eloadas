@@ -5,7 +5,7 @@ import Pager from '@/components/shared/pager';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import axios from 'axios';
 
-export default function index() {
+export default function MessageIndexView() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [page, setPage] = useState<number>(1);
     const lastPage = useRef<number>(0);
@@ -27,7 +27,7 @@ export default function index() {
 
     return (
         <AppHeaderLayout>
-            <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages} />
+            <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages}/>
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
         </AppHeaderLayout>
     );

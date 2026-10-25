@@ -8,40 +8,41 @@ import MessageRow from '@/components/message/message-row';
 type Props = {
     headerLabels: string[];
     objectToMap: Inventor[] | Invention[] | Message[];
-    hasOpertions?: boolean
-}
+    hasOperations?: boolean;
+};
 
 type HeaderProps = {
     headerLabels: string[];
-    hasOpertions?: boolean;
+    hasOperations?: boolean;
 };
 
-function Header({ headerLabels, hasOpertions = false } : HeaderProps) {
-    return <thead><tr>
-        {
-            headerLabels.map((label, id) => (
-                <th key={id}>
-                    { label }
-                </th>
-            ))
-        }
-        { hasOpertions && <th>Operations</th> }
-    </tr></thead>
+function Header({ headerLabels, hasOperations: hasOperations = false }: HeaderProps) {
+    return (
+        <thead>
+            <tr>
+                {headerLabels.map((label, id) => (
+                    <th key={id}>{label}</th>
+                ))}
+                {hasOperations && <th>Operations</th>}
+            </tr>
+        </thead>
+    );
 }
 
 type BodyProps = {
-    elements : Inventor[] | Invention[] | Message[];
-}
+    elements: Inventor[] | Invention[] | Message[];
+    hasOperations?: boolean;
+};
 
-function Body({ elements } : BodyProps) {
+function Body({ elements, hasOperations = false } : BodyProps) {
     return <tbody>
         {
             elements.map((obj, id) => {
                 switch (obj.type) {
                     case 'Invention':
-                        return <InventionRow key={id} invention={obj} isComplex={false}/>;
+                        return <InventionRow key={id} invention={obj} isComplex={false} hasOperations={hasOperations}/>;
                     case 'Inventor':
-                        return <InventorRow key={id} inventor={obj} isComplex={false}/>;
+                        return <InventorRow key={id} inventor={obj} isComplex={false} hasOperations={hasOperations}/>;
                     case 'Message':
                         return <MessageRow key={id} message={obj}/>;
                 }
@@ -50,11 +51,11 @@ function Body({ elements } : BodyProps) {
     </tbody>
 }
 
-export default function Table({ objectToMap, headerLabels, hasOpertions = false } : Props) {
+export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
         <table>
-            <Header headerLabels={headerLabels} hasOpertions={hasOpertions} />
-            <Body elements={objectToMap} />
+            <Header headerLabels={headerLabels} hasOperations={hasOperations} />
+            <Body elements={objectToMap} hasOperations={hasOperations} />
         </table>
     );
 }

@@ -3,11 +3,12 @@ import { router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 
 type Props = {
-    invention: Invention,
-    isComplex: boolean
+    invention: Invention;
+    isComplex: boolean;
+    hasOperations?: boolean;
 }
 
-export default function InventionRow({ invention, isComplex } : Props) {
+export default function InventionRow({ invention, isComplex, hasOperations = false } : Props) {
     return (
         <>
             {isComplex ? (
@@ -20,20 +21,24 @@ export default function InventionRow({ invention, isComplex } : Props) {
                             ))}
                         </ul>
                     </td>
-                    <td>
-                        <Button onClick={() => router.get(`/crud/inventions/${invention.id}`)}>Details</Button>
-                        <Button onClick={() => router.get(`/crud/inventions/update/${invention.id}`)}>Update</Button>
-                        <Button onClick={() => router.get(`/crud/inventions/delete/${invention.id}`)}>Delete</Button>
-                    </td>
+                    { hasOperations && (
+                        <td>
+                            <Button onClick={() => router.get(`/crud/inventions/${invention.id}`)}>Details</Button>
+                            <Button onClick={() => router.get(`/crud/inventions/update/${invention.id}`)}>Update</Button>
+                            <Button onClick={() => router.get(`/crud/inventions/delete/${invention.id}`)}>Delete</Button>
+                        </td>
+                    )}
                 </tr>
             ) : (
                 <tr>
                     <td>{invention.name}</td>
-                    <td>
-                        <Button onClick={() => router.get(`/crud/inventions/${invention.id}`)}>Details</Button>
-                        <Button onClick={() => router.get(`/crud/inventions/update/${invention.id}`)}>Update</Button>
-                        <Button onClick={() => router.get(`/crud/inventions/delete/${invention.id}`)}>Delete</Button>
-                    </td>
+                    { hasOperations &&
+                        <td>
+                            <Button onClick={() => router.get(`/crud/inventions/${invention.id}`)}>Details</Button>
+                            <Button onClick={() => router.get(`/crud/inventions/update/${invention.id}`)}>Update</Button>
+                            <Button onClick={() => router.get(`/crud/inventions/delete/${invention.id}`)}>Delete</Button>
+                        </td>
+                    }
                 </tr>
             )}
         </>
