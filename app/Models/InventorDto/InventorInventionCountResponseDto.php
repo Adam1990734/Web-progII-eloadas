@@ -13,6 +13,9 @@ class InventorInventionCountResponseDto implements InventorDto
 
     public static function fromArray(array $inventor)
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            $inventor["name"],
+            (int) $inventor["count"]
+        );
     }
 }

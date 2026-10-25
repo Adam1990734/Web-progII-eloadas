@@ -9,10 +9,15 @@ class DiagramController extends Controller
     public function __construct(
         private readonly DiagramService $diagramService
     ) {}
-    public function inventorsWithInventionsCount() {
 
+    public function withInventionsCount() {
+        return response()->json(
+            $this->diagramService->getAllInventorPairedWithInventionCount()
+        );
     }
-    public function inventorsTimeline() {
-
+    public function timeline() {
+        return response()->json(
+            $this->diagramService->getAllInventorTimeline()
+        );
     }
 }

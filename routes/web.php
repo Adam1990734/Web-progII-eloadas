@@ -18,6 +18,7 @@ require __DIR__.'/auth.php';
 require __DIR__.'/rest/inventions.php';
 require __DIR__.'/rest/inventors.php';
 require __DIR__.'/rest/message.php';
+require __DIR__.'/rest/diagram.php';
 
 //React page-ek:
 require __DIR__.'/crud/inventions.php';

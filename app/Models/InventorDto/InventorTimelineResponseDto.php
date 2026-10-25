@@ -8,12 +8,16 @@ class InventorTimelineResponseDto implements InventorDto
 {
     public function __construct(
         public readonly string $name,
-        public readonly int $birtYear,
-        public readonly int $deathYear
+        public readonly int $birthYear,
+        public readonly int|null $deathYear
     ){}
 
     public static function fromArray(array $inventor)
     {
-        // TODO: Implement fromArray() method.
+        return new self(
+            $inventor["name"],
+            (int) $inventor["birthYear"],
+            (int) $inventor["deathYear"]
+        );
     }
 }
