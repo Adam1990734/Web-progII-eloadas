@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { InventionRequest, InventionResponse } from '@/types/invention';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 export default function Create() {
     const invention = useRef<InventionRequest>({
@@ -26,8 +27,8 @@ export default function Create() {
     }
 
     return (
-        <>
-            {result.status !== 0 && result.new && (
+        <AppHeaderLayout>
+            {result.status === 201 && result.new && (
                 <>
                     <span>The invention is created!</span>
                 </>
@@ -41,11 +42,11 @@ export default function Create() {
                 <Input type={'text'} onChange={(e) => (invention.current.name = e.currentTarget.value)} required={true} />
                 <Button type={'submit'}>Add</Button>
             </form>
-            {result.status !== 0 && result.new && (
+            {result.status === 201 && result.new && (
                 <>
                     <a href={`/crud/inventions/${result.new.id}`}>Click here to watch it!</a>
                 </>
             )}
-        </>
+        </AppHeaderLayout>
     );
 }

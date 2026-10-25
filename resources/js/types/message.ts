@@ -24,7 +24,5 @@ export interface MessageResponse {
 }
 
 export interface MessageRequest {
-    content: string,
-    createdAt: Date,
-    connectedUser: User|null
+    content: string
 }

@@ -1,8 +1,9 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InventionRequest, InventionResponse } from '@/types';
 import axios from 'axios';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 type Props = {
     id: number
@@ -27,8 +28,8 @@ export default function Delete({ id } : Props) {
     };
 
     return (
-        <>
-            {result !== 0 && result === 204 && (
+        <AppHeaderLayout>
+            {result === 204 && (
                 <>
                     <span>Successfully deletion!</span>
                 </>
@@ -47,6 +48,6 @@ export default function Delete({ id } : Props) {
                 />
                 <Button type={'submit'}>Delete</Button>
             </form>
-        </>
+        </AppHeaderLayout>
     );
 }

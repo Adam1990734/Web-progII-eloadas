@@ -8,13 +8,15 @@ import MessageRow from '@/components/message/message-row';
 type Props = {
     headerLabels: string[];
     objectToMap: Inventor[] | Invention[] | Message[];
+    hasOpertions?: boolean
 }
 
 type HeaderProps = {
-    headerLabels : string[];
-}
+    headerLabels: string[];
+    hasOpertions?: boolean;
+};
 
-function Header({ headerLabels } : HeaderProps) {
+function Header({ headerLabels, hasOpertions = false } : HeaderProps) {
     return <thead><tr>
         {
             headerLabels.map((label, id) => (
@@ -23,7 +25,7 @@ function Header({ headerLabels } : HeaderProps) {
                 </th>
             ))
         }
-        <th>Operations</th>
+        { hasOpertions && <th>Operations</th> }
     </tr></thead>
 }
 
@@ -48,10 +50,10 @@ function Body({ elements } : BodyProps) {
     </tbody>
 }
 
-export default function Table({ objectToMap, headerLabels } : Props) {
+export default function Table({ objectToMap, headerLabels, hasOpertions = false } : Props) {
     return (
         <table>
-            <Header headerLabels={headerLabels} />
+            <Header headerLabels={headerLabels} hasOpertions={hasOpertions} />
             <Body elements={objectToMap} />
         </table>
     );

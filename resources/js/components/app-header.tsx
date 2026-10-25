@@ -22,6 +22,31 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'CRUD',
+        href: '/crud',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Contact',
+        href: '/contact',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Messages',
+        href: '/messages',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'View Database',
+        href: '/database',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Diagram',
+        href: '/diagram',
+        icon: LayoutGrid,
+    }
 ];
 
 const rightNavItems: NavItem[] = [

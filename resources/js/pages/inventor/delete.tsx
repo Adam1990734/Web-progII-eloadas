@@ -1,9 +1,9 @@
-import { Form } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
-import { InventionMinimal, InventorRequest, InventorResponse } from '@/types';
+import { InventorResponse } from '@/types';
 import axios from 'axios';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 type Props = {
     id: number
@@ -26,8 +26,8 @@ export default function Delete({ id } : Props) {
     };
 
     return (
-        <>
-            {result !== 0 && result === 204 && (
+        <AppHeaderLayout>
+            {result === 204 && (
                 <>
                     <span>Successfully deletion!</span>
                 </>
@@ -38,26 +38,11 @@ export default function Delete({ id } : Props) {
                     await onSubmit();
                 }}
             >
-                <Input
-                    type={'text'}
-                    defaultValue={inventor?.name ?? ''}
-                    required={true}
-                    disabled={true}
-                />
-                <Input
-                    type={'number'}
-                    defaultValue={inventor?.bornat ?? ''}
-                    required={true}
-                    disabled={true}
-                />
-                <Input
-                    type={'number'}
-                    defaultValue={inventor?.diedat ?? ''}
-                    required={true}
-                    disabled={true}
-                />
+                <Input type={'text'} defaultValue={inventor?.name ?? ''} required={true} disabled={true} />
+                <Input type={'number'} defaultValue={inventor?.bornat ?? ''} required={true} disabled={true} />
+                <Input type={'number'} defaultValue={inventor?.diedat ?? ''} required={true} disabled={true} />
                 <Button type={'submit'}>Delete</Button>
             </form>
-        </>
+        </AppHeaderLayout>
     );
 }

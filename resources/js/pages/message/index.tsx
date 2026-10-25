@@ -1,25 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { Message } from '@/types';
-import { MessageWithoutType } from '@/types/message';
+import { Message, MessageRequest, MessageResponse } from '@/types';
 import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import axios from 'axios';
 
 export default function index() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [messages, setMessages] = useState<Message[]>([]);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [page, setPage] = useState<number>(1);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const lastpage = useRef<number>(0);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const lastPage = useRef<number>(0);
     useEffect(() => {
-        fetch(`/api/messages?page=${page}`)
-            .then((resp) => resp.json())
+        axios.get(`/api/messages?page=${page}`)
+            .then(data => data.data)
             .then((data) => {
-                lastpage.current = data.last_page;
+                lastPage.current = data.last_page;
                 setMessages(
                     data.data.map(
-                        (obj: MessageWithoutType): Message => ({
+                        (obj: MessageResponse): Message => ({
                             ...obj,
                             type: 'Message',
                         }),
@@ -29,11 +26,9 @@ export default function index() {
     }, [page]);
 
     return (
-        <>
-            <Table headerLabels={[
-                'Name', 'Created At', 'Content'
-            ]} objectToMap={messages} />
-            <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current} />
-        </>
+        <AppHeaderLayout>
+            <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages} />
+            <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
+        </AppHeaderLayout>
     );
 }

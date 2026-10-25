@@ -3,15 +3,12 @@ import { Invention } from '@/types';
 import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 import axios from 'axios';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 export default function index() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [inventions, setInventions] = useState<Invention[]>([]);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [page, setPage] = useState<number>(1);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const lastpage = useRef<number>(0);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         axios.get(`/api/inventions?page=${page}`)
             .then(data => data.data)
@@ -29,9 +26,9 @@ export default function index() {
     }, [page]);
 
     return (
-        <>
-            <Table headerLabels={['name']} objectToMap={inventions} />
+        <AppHeaderLayout>
+            <Table headerLabels={['name']} objectToMap={inventions} hasOpertions={true} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current}/>
-        </>
+        </AppHeaderLayout>
     );
 }

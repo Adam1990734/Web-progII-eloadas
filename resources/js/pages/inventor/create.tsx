@@ -1,9 +1,9 @@
-import { Form } from '@inertiajs/react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { InventorRequest, InventorResponse } from '@/types';
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 export default function Create() {
     const inventorRef = useRef<InventorRequest>({
@@ -30,8 +30,8 @@ export default function Create() {
     };
 
     return (
-        <>
-            {result.status !== 0 && result.new && (
+        <AppHeaderLayout>
+            {result.status !== 201 && result.new && (
                 <>
                     <span>The inventor is created!</span>
                 </>
@@ -54,11 +54,11 @@ export default function Create() {
                 />
                 <Button type={'submit'}>Add</Button>
             </form>
-            {result.status !== 0 && result.new && (
+            {result.status !== 201 && result.new && (
                 <>
                     <a href={`/crud/inventors/${result.new.id}`}>Click here to watch it!</a>
                 </>
             )}
-        </>
+        </AppHeaderLayout>
     );
 }

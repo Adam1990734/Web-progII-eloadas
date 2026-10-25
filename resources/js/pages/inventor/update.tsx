@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { InventorResponse, InventorRequest, InventionMinimal } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
 type Props = {
     id: number;
@@ -39,8 +40,8 @@ export default function Update({ id }: Props) {
     };
 
     return (
-        <>
-            {result !== 0 && result === 204 && (
+        <AppHeaderLayout>
+            {result === 204 && (
                 <>
                     <span>Successfully update!</span>
                 </>
@@ -71,6 +72,6 @@ export default function Update({ id }: Props) {
                 />
                 <Button type={'submit'}>Save</Button>
             </form>
-        </>
+        </AppHeaderLayout>
     );
 }
