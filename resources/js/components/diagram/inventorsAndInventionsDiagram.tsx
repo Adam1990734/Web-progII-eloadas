@@ -9,7 +9,7 @@ type Props = {
     inventorAndCounts: InventorAndInventionCount[]
 };
 
-export default function InventorBarChart({ inventorAndCounts }: Props) {
+export default function InventorsWithInventionsCount({ inventorAndCounts }: Props) {
     const inventors: string[] = inventorAndCounts.map( inventor => inventor.name);
     const counts: number[] = inventorAndCounts.map(inventor => inventor.count);
 

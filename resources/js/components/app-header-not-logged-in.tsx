@@ -24,14 +24,14 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 
 const mainNavItems: NavItem[] = [
     {
-        title: "Log In",
-        href: "/login",
-        icon: LayoutGrid
+        title: 'Log In',
+        href: '/login',
+        icon: LayoutGrid,
     },
     {
-        title: "Registration",
-        href: "/register",
-        icon: LayoutGrid
+        title: 'Registration',
+        href: '/register',
+        icon: LayoutGrid,
     },
     {
         title: 'Contact',
@@ -44,21 +44,33 @@ const mainNavItems: NavItem[] = [
         icon: Folder,
         children: [
             {
-                title: "Inventor",
-                href: "/show/inventors",
-                icon: LayoutGrid
+                title: 'Inventor',
+                href: '/show/inventors',
+                icon: LayoutGrid,
             },
             {
-                title: "Inventions",
-                href: "/show/inventions",
-                icon: LayoutGrid
-            }
-        ]
+                title: 'Inventions',
+                href: '/show/inventions',
+                icon: LayoutGrid,
+            },
+        ],
     },
     {
         title: 'Diagram',
         href: '/diagram',
-        icon: LayoutGrid,
+        icon: Folder,
+        children: [
+            {
+                title: 'InventionCounts',
+                href: '/diagrams/withcount',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'InventorTimeLine',
+                href: '/diagrams/timeline',
+                icon: LayoutGrid,
+            },
+        ],
     },
 ];
 

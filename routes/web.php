@@ -25,3 +25,4 @@ require __DIR__.'/crud/inventions.php';
 require __DIR__.'/crud/inventors.php';
 require __DIR__.'/messages.php';
 require __DIR__.'/show.php';
+require __DIR__.'/diagram.php';

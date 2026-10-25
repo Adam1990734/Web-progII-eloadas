@@ -70,7 +70,19 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Diagram',
         href: '/diagram',
-        icon: LayoutGrid,
+        icon: Folder,
+        children: [
+            {
+                title: 'InventionCounts',
+                href: '/diagrams/withcount',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'InventorTimeLine',
+                href: '/diagrams/timeline',
+                icon: LayoutGrid,
+            },
+        ],
     },
 ];
 
