@@ -13,7 +13,7 @@ class Inventor_inventionSeeder extends Seeder
         $path = storage_path('plainSeedFiles/kapcsol.txt');
 
         $lines = explode(
-            PHP_EOL,
+            "\n",
             trim(file_get_contents($path))
         );
 

@@ -10,9 +10,8 @@ class InventorSeeder extends Seeder
     public function run()
     {
         $path = storage_path('plainSeedFiles/kutato.txt');
-
         $lines = explode(
-            PHP_EOL,
+            "\n",
             trim(file_get_contents($path))
         );
 

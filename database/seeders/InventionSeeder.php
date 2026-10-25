@@ -11,7 +11,7 @@ class InventionSeeder extends Seeder
     {
         $path = storage_path('plainSeedFiles/talalmany.txt');
         $lines = explode(
-            PHP_EOL,
+            "\n",
             trim(file_get_contents($path))
         );
 
