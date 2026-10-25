@@ -24,8 +24,20 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'CRUD',
-        href: '/crud',
-        icon: LayoutGrid,
+        href: '',
+        icon: Folder,
+        children: [
+            {
+                title: 'Inventor',
+                href: '/crud/inventors',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'Inventions',
+                href: '/crud/inventions',
+                icon: LayoutGrid,
+            },
+        ],
     },
     {
         title: 'Contact',
@@ -39,14 +51,26 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'View Database',
-        href: '/database',
-        icon: LayoutGrid,
+        href: '',
+        icon: Folder,
+        children: [
+            {
+                title: 'Inventor',
+                href: '/show/inventors',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'Inventions',
+                href: '/show/inventions',
+                icon: LayoutGrid,
+            },
+        ],
     },
     {
         title: 'Diagram',
         href: '/diagram',
         icon: LayoutGrid,
-    }
+    },
 ];
 
 const rightNavItems: NavItem[] = [
@@ -128,24 +152,60 @@ export function AppHeaderLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => (
-                                    <NavigationMenuItem key={index} className="relative flex h-full items-center">
-                                        <Link
-                                            href={item.href}
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                page.url === (typeof item.href === 'string' ? item.href : item.href.url) && activeItemStyles,
-                                                'h-9 cursor-pointer px-3',
-                                            )}
-                                        >
-                                            {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
-                                            {item.title}
-                                        </Link>
-                                        {page.url === item.href && (
-                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
-                                        )}
-                                    </NavigationMenuItem>
-                                ))}
+                                {mainNavItems.map((item: NavItem, index) => {
+                                    if (item.children)
+                                        return (
+                                            <NavigationMenuItem key={index} className="relative flex h-full items-center">
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <Button variant="ghost" className="h-9 px-3">
+                                                            {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
+                                                            {item.title}
+                                                        </Button>
+                                                    </DropdownMenuTrigger>
+
+                                                    <DropdownMenuContent>
+                                                        {item.children.map((ch, id) => (
+                                                            <div key={id}>
+                                                                <Link
+                                                                    href={ch.href}
+                                                                    className={cn(
+                                                                        navigationMenuTriggerStyle(),
+                                                                        page.url === (typeof item.href === 'string' ? ch.href : ch.href) &&
+                                                                            activeItemStyles,
+                                                                        'h-9 cursor-pointer px-3',
+                                                                    )}
+                                                                >
+                                                                    {ch.icon && <Icon iconNode={ch.icon} className="mr-2 h-4 w-4" />}
+                                                                    {ch.title}
+                                                                </Link>
+                                                                <br></br>
+                                                            </div>
+                                                        ))}
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </NavigationMenuItem>
+                                        );
+                                    else
+                                        return (
+                                            <NavigationMenuItem key={index} className="relative flex h-full items-center">
+                                                <Link
+                                                    href={item.href}
+                                                    className={cn(
+                                                        navigationMenuTriggerStyle(),
+                                                        page.url === (typeof item.href === 'string' ? item.href : item.href.url) && activeItemStyles,
+                                                        'h-9 cursor-pointer px-3',
+                                                    )}
+                                                >
+                                                    {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
+                                                    {item.title}
+                                                </Link>
+                                                {page.url === item.href && (
+                                                    <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
+                                                )}
+                                            </NavigationMenuItem>
+                                        );
+                                })}
                             </NavigationMenuList>
                         </NavigationMenu>
                     </div>

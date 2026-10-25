@@ -11,10 +11,6 @@ type Props = {
 
 const breadCrumbs: BreadcrumbItem[] = [
     {
-        title: 'CRUD',
-        href: '/crud',
-    },
-    {
         title: 'inventors',
         href: '/crud/inventors',
     },

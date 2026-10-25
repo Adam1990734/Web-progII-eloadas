@@ -12,15 +12,11 @@ type Props = {
 export default function InventorUpdateView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
-            title: 'CRUD',
-            href: '/crud',
-        },
-        {
             title: 'inventors',
             href: '/crud/inventors',
         },
         {
-            title: 'create',
+            title: 'update',
             href: `/crud/inventors/update/${id}`,
         },
     ];

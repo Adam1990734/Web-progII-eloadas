@@ -11,10 +11,6 @@ type Props = {
 export default function InventionDetailsView({ id }: Props) {
     const breadCrumbs: BreadcrumbItem[] = [
         {
-            title: 'CRUD',
-            href: '/crud',
-        },
-        {
             title: 'inventions',
             href: '/crud/inventions',
         },

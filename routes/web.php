@@ -20,7 +20,6 @@ require __DIR__.'/rest/inventors.php';
 require __DIR__.'/rest/message.php';
 
 //React page-ek:
-Route::inertia("/crud", "crud/index");
 require __DIR__.'/crud/inventions.php';
 require __DIR__.'/crud/inventors.php';
 require __DIR__.'/messages.php';

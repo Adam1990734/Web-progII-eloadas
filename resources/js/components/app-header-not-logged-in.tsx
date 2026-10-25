@@ -39,7 +39,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'View Database',
-        href: '/database',
+        href: '',
         icon: Folder,
         children: [
             {
@@ -148,7 +148,7 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
 
                                                     <DropdownMenuContent>
                                                         {item.children.map((ch, id) => (
-                                                            <>
+                                                            <div key={id}>
                                                                 <Link
                                                                     href={ch.href}
                                                                     className={cn(
@@ -162,7 +162,7 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                                                     {ch.title}
                                                                 </Link>
                                                                 <br></br>
-                                                            </>
+                                                            </div>
                                                         ))}
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>

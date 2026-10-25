@@ -8,10 +8,6 @@ import { BreadcrumbItem } from '@/types';
 
 const breadCrumbs: BreadcrumbItem[] = [
     {
-        title: 'CRUD',
-        href: '/crud',
-    },
-    {
         title: 'inventions',
         href: '/crud/inventions',
     },
