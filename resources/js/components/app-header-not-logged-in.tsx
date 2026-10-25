@@ -16,10 +16,11 @@ import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogoIcon from './app-logo-icon';
 import { it } from 'node:test';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const mainNavItems: NavItem[] = [
     {
@@ -102,12 +103,37 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">
                                         <div className="flex flex-col space-y-4">
-                                            {mainNavItems.map((item) => (
-                                                <Link key={item.title} href={item.href} className="flex items-center space-x-2 font-medium">
-                                                    {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
-                                                    <span>{item.title}</span>
-                                                </Link>
-                                            ))}
+                                            {mainNavItems.map((item) =>
+                                                item.children ? (
+                                                    <Collapsible key={item.title}>
+                                                        <CollapsibleTrigger className="flex w-full items-center justify-between py-2 font-medium">
+                                                            <div className="flex items-center gap-2">
+                                                                {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
+                                                                <span>{item.title}</span>
+                                                            </div>
+
+                                                            <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+                                                        </CollapsibleTrigger>
+
+                                                        <CollapsibleContent className="mt-2 ml-7 flex flex-col gap-2">
+                                                            {item.children.map((ch) => (
+                                                                <Link
+                                                                    key={ch.title}
+                                                                    href={ch.href}
+                                                                    className="text-muted-foreground hover:text-foreground"
+                                                                >
+                                                                    {ch.title}
+                                                                </Link>
+                                                            ))}
+                                                        </CollapsibleContent>
+                                                    </Collapsible>
+                                                ) : (
+                                                    <Link key={item.title} href={item.href} className="flex items-center space-x-2 font-medium">
+                                                        {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
+                                                        <span>{item.title}</span>
+                                                    </Link>
+                                                ),
+                                            )}
                                         </div>
 
                                         <div className="flex flex-col space-y-4">
@@ -134,8 +160,8 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item : NavItem, index) => {
-                                    if(item.children)
+                                {mainNavItems.map((item: NavItem, index) => {
+                                    if (item.children)
                                         return (
                                             <NavigationMenuItem key={index} className="relative flex h-full items-center">
                                                 <DropdownMenu>
@@ -147,8 +173,8 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                                     </DropdownMenuTrigger>
 
                                                     <DropdownMenuContent>
-                                                        {item.children.map((ch, id) => (
-                                                            <div key={id}>
+                                                        {item.children.map((ch) => (
+                                                            <div key={ch.title}>
                                                                 <Link
                                                                     href={ch.href}
                                                                     className={cn(
@@ -186,7 +212,7 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                                     <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
                                                 )}
                                             </NavigationMenuItem>
-                                        )
+                                        );
                                 })}
                             </NavigationMenuList>
                         </NavigationMenu>
