@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\DiagramService;
 use Illuminate\Support\ServiceProvider;
 
 use \App\Services\InventorService;
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             MessageService::class,
             Implementations\MessageServiceImp::class
+        );
+        $this->app->bind(
+            DiagramService::class,
+            Implementations\DiagramServiceImp::class
         );
     }
 
