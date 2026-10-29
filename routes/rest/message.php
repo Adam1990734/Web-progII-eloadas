@@ -5,7 +5,7 @@ use App\Http\Controllers\MessageController;
 
 Route::prefix("/api/messages")
     ->group(function() {
-        Route::post("/create", [MessageController::class, "create"]);
+        Route::post("/", [MessageController::class, "create"]);
     });
 
 Route::prefix("/api/messages")

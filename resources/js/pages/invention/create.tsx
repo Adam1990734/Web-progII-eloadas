@@ -29,7 +29,7 @@ export default function InventionCreateView() {
         new: null,
     });
     const onSubmit = async () => {
-        const resp = await axios.post<InventionResponse>('/api/inventions/create', {
+        const resp = await axios.post<InventionResponse>('/api/inventions', {
             ...invention.current,
         });
         setResult({
@@ -51,7 +51,10 @@ export default function InventionCreateView() {
                     await onSubmit();
                 }}
             >
-                <Input type={'text'} onChange={(e) => (invention.current.name = e.currentTarget.value)} required={true} />
+                <div>
+                    <label>Name:</label> <br/>
+                    <Input type={'text'} onChange={(e) => (invention.current.name = e.currentTarget.value)} required={true} />
+                </div>
                 <Button type={'submit'}>Add</Button>
             </form>
             {result.status === 201 && result.new && (

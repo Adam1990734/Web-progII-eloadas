@@ -72,4 +72,17 @@ class InventorController extends Controller
             return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
+
+    public function suggestByName(Request $request)
+    {
+        $name = $request->query("name") ?? "";
+        if(empty($name))
+            return response()->json(
+                $this->inventorService->findAllGetAsMinimal(10)
+            );
+        $inventors = $this->inventorService->findSuggestionsByNameAsMinimal($name, 10);
+        return response()->json(
+            $inventors
+        );
+    }
 }

@@ -32,7 +32,7 @@ export default function InventorDeleteView({ id }: Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.delete(`/api/inventors/delete/${id}`);
+        const resp = await axios.delete(`/api/inventors/${id}`);
         setResult(resp.status);
     };
 
@@ -49,9 +49,18 @@ export default function InventorDeleteView({ id }: Props) {
                     await onSubmit();
                 }}
             >
-                <Input type={'text'} defaultValue={inventor?.name ?? ''} required={true} disabled={true} />
-                <Input type={'number'} defaultValue={inventor?.bornat ?? ''} required={true} disabled={true} />
-                <Input type={'number'} defaultValue={inventor?.diedat ?? ''} required={true} disabled={true} />
+                <div>
+                    <label>Name:</label> <br />
+                    <Input type={'text'} defaultValue={inventor?.name ?? ''} required={true} disabled={true} />
+                </div>
+                <div>
+                    <label>Born At:</label> <br />
+                    <Input type={'number'} defaultValue={inventor?.bornat ?? ''} required={true} disabled={true} />
+                </div>
+                <div>
+                    <label>Died At:</label> <br />
+                    <Input type={'number'} defaultValue={inventor?.diedat ?? ''} required={true} disabled={true} />
+                </div>
                 <Button type={'submit'}>Delete</Button>
             </form>
         </AppHeaderLayout>

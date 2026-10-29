@@ -2,6 +2,7 @@
 
 namespace App\Services\Implementations;
 
+use App\Models\Inventor;
 use App\Services\InventionService;
 use App\Models\Invention;
 use App\Models\InventionDto\InventionMinimalDto;
@@ -20,6 +21,14 @@ class InventionServiceImp implements InventionService
             )
         );
         return $result->toArray();
+    }
+
+    public function findAllGetAsMinimal(int $len) : array
+    {
+        $result = Invention::with("inventors")->limit($len)->get();
+        return $result->map(
+            fn (Invention $invention) => InventionServiceImp::toMinDto($invention)
+        )->toArray();
     }
 
     public function findById(int $id, bool $isMinimal = false): InventionResponseDto | InventionMinimalDto | null
@@ -92,5 +101,16 @@ class InventionServiceImp implements InventionService
             $invention->id,
             $invention->name
         );
+    }
+
+    public function findSuggestionsByNameAsMinimal(string $name, int $size): array
+    {
+        return Invention::where("inventions.name", "LIKE", "%".$name."%")
+            ->limit($size)
+            ->get()
+            ->map(
+                fn($invention) => InventionServiceImp::toMinDto($invention)
+            )
+            ->toArray();
     }
 }

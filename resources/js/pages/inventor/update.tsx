@@ -4,6 +4,7 @@ import { InventorResponse, InventorRequest, InventionMinimal, BreadcrumbItem } f
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import InventionSelector from '@/components/invention/invention-selector';
 
 type Props = {
     id: number;
@@ -27,6 +28,7 @@ export default function InventorUpdateView({ id }: Props) {
         diedat: null,
         inventions: []
     });
+    const [inventions, setInventions] = useState<InventionMinimal[]>([]);
     const [inventor, setInventor] = useState<InventorResponse | null>(null);
     useEffect(() => {
         axios.get<InventorResponse>(`/api/inventors/${id}`).then((resp) => {
@@ -35,6 +37,7 @@ export default function InventorUpdateView({ id }: Props) {
                 ...other,
                 inventions: inventions.map((invention: InventionMinimal) : number => invention.id)
             };
+            setInventions(inventions);
             setInventor({
                 ...resp.data
             });
@@ -43,8 +46,7 @@ export default function InventorUpdateView({ id }: Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        console.log(inventorRef.current);
-        const resp = await axios.put<InventorResponse>(`/api/inventors/update/${id}`, {
+        const resp = await axios.put<InventorResponse>(`/api/inventors/${id}`, {
             ...inventorRef.current
         });
         setResult(resp.status);
@@ -63,24 +65,45 @@ export default function InventorUpdateView({ id }: Props) {
                     await onSubmit();
                 }}
             >
-                <Input
-                    type={'text'}
-                    defaultValue={inventor?.name ?? ''}
-                    onChange={(e) => (inventorRef.current.name = e.currentTarget.value)}
-                    required={true}
-                />
-                <Input
-                    type={'number'}
-                    defaultValue={inventor?.bornat ?? ''}
-                    onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))}
-                    required={true}
-                />
-                <Input
-                    type={'number'}
-                    defaultValue={inventor?.diedat ?? ''}
-                    onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
-                    required={false}
-                />
+                <div>
+                    <label>Name:</label> <br/>
+                    <Input
+                        type={'text'}
+                        defaultValue={inventor?.name ?? ''}
+                        onChange={(e) => (inventorRef.current.name = e.currentTarget.value)}
+                        required={true}
+                    />
+                </div>
+                <div>
+                    <label>Born At:</label> <br/>
+                    <Input
+                        type={'number'}
+                        defaultValue={inventor?.bornat ?? ''}
+                        onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))}
+                        required={true}
+                    />
+                </div>
+                <div>
+                    <label>Died At:</label> <br/>
+                    <Input
+                        type={'number'}
+                        defaultValue={inventor?.diedat ?? ''}
+                        onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
+                        required={false}
+                    />
+                </div>
+                <div>
+                    <label className={'form-label'}>Inventions: </label> <br />
+                    <InventionSelector
+                        value={inventions}
+                        onChange={(items) => {
+                            setInventions(items);
+
+                            inventorRef.current.inventions =
+                                items.map(item => item.id);
+                        }}
+                    />
+                </div>
                 <Button type={'submit'}>Save</Button>
             </form>
         </AppHeaderLayout>

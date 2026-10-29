@@ -22,6 +22,14 @@ class InventorServiceImp implements InventorService
         return $result->toArray();
     }
 
+    public function findAllGetAsMinimal(int $len): array
+    {
+        $result = Inventor::with("inventions")->limit($len)->get();
+        return $result->map(
+            fn (Inventor $inventor) => InventorServiceImp::toMinDto($inventor)
+        )->toArray();
+    }
+
     public function findById(int $id, bool $isMinimal = false): InventorResponseDto | InventorMinimalDto| null
     {
         $inventor = Inventor::find($id);
@@ -47,6 +55,7 @@ class InventorServiceImp implements InventorService
     public function create(InventorRequestDto $dto): InventorResponseDto
     {
         $inventor = Inventor::create(get_object_vars($dto));
+        $inventor->inventions()->sync($dto->inventions ?? []);
         return InventorServiceImp::toRespDto($inventor);
     }
 
@@ -56,6 +65,7 @@ class InventorServiceImp implements InventorService
         if($inventor === null)
             return null;
         $inventor->update(get_object_vars($dto));
+        $inventor->inventions()->sync($dto->inventions ?? []);
         return InventorServiceImp::toRespDto($inventor);
     }
 
@@ -99,5 +109,16 @@ class InventorServiceImp implements InventorService
             $inventor->id,
             $inventor->name
         );
+    }
+
+    public function findSuggestionsByNameAsMinimal(string $name, int $size): array
+    {
+        return Inventor::where("inventors.name", "LIKE", "%".$name."%")
+            ->limit($size)
+            ->get()
+            ->map(
+                fn($inventor) => InventorServiceImp::toMinDto($inventor)
+            )
+            ->toArray();
     }
 }

@@ -65,4 +65,17 @@ class InventionController extends Controller
             return response()->noContent(Response::HTTP_NOT_FOUND);
         return response()->noContent();
     }
+
+    public function suggestByName(Request $request)
+    {
+        $name = $request->query("name") ?? "";
+        if(empty($name))
+            return response()->json(
+                $this->inventionService->findAllGetAsMinimal(10)
+            );
+        $inventions = $this->inventionService->findSuggestionsByNameAsMinimal($name, 10);
+        return response()->json(
+            $inventions
+        );
+    }
 }

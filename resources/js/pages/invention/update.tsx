@@ -36,7 +36,7 @@ export default function InventionUpdateView({ id }: Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.put<InventionResponse>(`/api/inventions/update/${id}`, {
+        const resp = await axios.put<InventionResponse>(`/api/inventions/${id}`, {
             ...inventionRef.current,
         });
         setResult(resp.status);
@@ -55,12 +55,15 @@ export default function InventionUpdateView({ id }: Props) {
                     await onSubmit();
                 }}
             >
-                <Input
-                    type={'text'}
-                    defaultValue={inventionRef.current.name ?? ''}
-                    onChange={(e) => (inventionRef.current.name = e.currentTarget.value)}
-                    required={true}
-                />
+                <div>
+                    <label>Name:</label> <br/>
+                    <Input
+                        type={'text'}
+                        defaultValue={inventionRef.current.name ?? ''}
+                        onChange={(e) => (inventionRef.current.name = e.currentTarget.value)}
+                        required={true}
+                    />
+                </div>
                 <Button type={'submit'}>Save</Button>
             </form>
         </AppHeaderLayout>

@@ -1,9 +1,10 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { BreadcrumbItem, InventorRequest, InventorResponse } from '@/types';
+import { BreadcrumbItem, InventorRequest, InventorResponse, InventionMinimal } from '@/types';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import InventionSelector from '@/components/invention/invention-selector';
 
 const breadCrumbs: BreadcrumbItem[] = [
     {
@@ -23,6 +24,7 @@ export default function InventorCreateView() {
         diedat: null,
         inventions: [],
     });
+    const [inventions, setInventions] = useState<InventionMinimal[]>([]);
     const [result, setResult] = useState<{
         status: number;
         new: InventorResponse | null;
@@ -31,8 +33,9 @@ export default function InventorCreateView() {
         new: null,
     });
     const onSubmit = async () => {
-        const resp = await axios.post<InventorResponse>('/api/inventors/create', {
+        const resp = await axios.post<InventorResponse>('/api/inventors', {
             ...inventorRef.current,
+            inventions: inventions.map((i) => i.id),
         });
         setResult({
             status: resp.status,
@@ -53,16 +56,29 @@ export default function InventorCreateView() {
                     await onSubmit();
                 }}
             >
-                <Input type={'text'} onChange={(e) => (inventorRef.current.name = e.currentTarget.value)} required={true} />
-                <Input type={'number'} onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))} required={true} />
-                <Input
-                    type={'number'}
-                    onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
-                    required={false}
-                />
+                <div>
+                    <label>Name:</label> <br />
+                    <Input type={'text'} onChange={(e) => (inventorRef.current.name = e.currentTarget.value)} required={true} />
+                </div>
+                <div>
+                    <label>Born At:</label> <br />
+                    <Input type={'number'} onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))} required={true} />
+                </div>
+                <div>
+                    <label>Died At:</label> <br />
+                    <Input
+                        type={'number'}
+                        onChange={(e) => (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)}
+                        required={false}
+                    />
+                </div>
+                <div>
+                    <label className={'form-label'}>Inventions: </label> <br />
+                    <InventionSelector value={inventions} onChange={setInventions} />
+                </div>
                 <Button type={'submit'}>Add</Button>
             </form>
-            {result.status !== 201 && result.new && (
+            {result.status === 201 && result.new && (
                 <>
                     <a href={`/crud/inventors/${result.new.id}`}>Click here to watch it!</a>
                 </>

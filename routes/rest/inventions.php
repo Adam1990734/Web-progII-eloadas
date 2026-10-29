@@ -6,10 +6,11 @@ use App\Http\Controllers\InventionController;
 Route::prefix("/api/inventions/")
     ->middleware(['auth', 'verified'])
     ->group(function () {
+        Route::get("/suggest", [InventionController::class, "suggestByName"]);
         Route::get("/{id}", [InventionController::class, "details"]);
-        Route::post("/create", [InventionController::class, "create"]);
-        Route::put("/update/{id}", [InventionController::class, "update"]);
-        Route::delete("/delete/{id}", [InventionController::class, "delete"]);
+        Route::post("/", [InventionController::class, "create"]);
+        Route::put("/{id}", [InventionController::class, "update"]);
+        Route::delete("/{id}", [InventionController::class, "delete"]);
     });
 
 Route::prefix("/api/inventions/")

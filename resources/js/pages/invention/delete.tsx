@@ -32,7 +32,7 @@ export default function InventionDeleteView({ id }: Props) {
 
     const [result, setResult] = useState<number>(0);
     const onSubmit = async () => {
-        const resp = await axios.delete(`/api/inventions/delete/${id}`);
+        const resp = await axios.delete(`/api/inventions/${id}`);
         setResult(resp.status);
     };
 
@@ -49,7 +49,10 @@ export default function InventionDeleteView({ id }: Props) {
                     await onSubmit();
                 }}
             >
-                <Input type={'text'} defaultValue={invention?.name ?? ''} required={true} disabled={true} />
+                <div>
+                    <label>Name:</label> <br/>
+                    <Input type={'text'} defaultValue={invention?.name ?? ''} required={true} disabled={true} />
+                </div>
                 <Button type={'submit'}>Delete</Button>
             </form>
         </AppHeaderLayout>
