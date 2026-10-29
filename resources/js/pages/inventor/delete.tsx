@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BreadcrumbItem, InventorResponse } from '@/types';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { router } from '@inertiajs/react';
 
 type Props = {
     id: number
@@ -63,6 +64,7 @@ export default function InventorDeleteView({ id }: Props) {
                 </div>
                 <Button type={'submit'}>Delete</Button>
             </form>
+            <Button onClick={() => router.get('/crud/inventors')}>Back</Button>
         </AppHeaderLayout>
     );
 }

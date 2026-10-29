@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/crud/inventors")
+    ->middleware(['auth', 'verified', 'admin'])
     ->group(function() {
         Route::inertia("/", "inventor/index")->name("inventors");
         Route::inertia("/create", "inventor/create");

@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import InventionSelector from '@/components/invention/invention-selector';
+import { router } from '@inertiajs/react';
 
 const breadCrumbs: BreadcrumbItem[] = [
     {
@@ -83,6 +84,7 @@ export default function InventorCreateView() {
                     <a href={`/crud/inventors/${result.new.id}`}>Click here to watch it!</a>
                 </>
             )}
+            <Button onClick={() => router.get('/crud/inventors')}>Back</Button>
         </AppHeaderLayout>
     );
 }

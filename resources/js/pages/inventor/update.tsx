@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import InventionSelector from '@/components/invention/invention-selector';
+import { router } from '@inertiajs/react';
 
 type Props = {
     id: number;
@@ -66,7 +67,7 @@ export default function InventorUpdateView({ id }: Props) {
                 }}
             >
                 <div>
-                    <label>Name:</label> <br/>
+                    <label>Name:</label> <br />
                     <Input
                         type={'text'}
                         defaultValue={inventor?.name ?? ''}
@@ -75,7 +76,7 @@ export default function InventorUpdateView({ id }: Props) {
                     />
                 </div>
                 <div>
-                    <label>Born At:</label> <br/>
+                    <label>Born At:</label> <br />
                     <Input
                         type={'number'}
                         defaultValue={inventor?.bornat ?? ''}
@@ -84,7 +85,7 @@ export default function InventorUpdateView({ id }: Props) {
                     />
                 </div>
                 <div>
-                    <label>Died At:</label> <br/>
+                    <label>Died At:</label> <br />
                     <Input
                         type={'number'}
                         defaultValue={inventor?.diedat ?? ''}
@@ -99,13 +100,13 @@ export default function InventorUpdateView({ id }: Props) {
                         onChange={(items) => {
                             setInventions(items);
 
-                            inventorRef.current.inventions =
-                                items.map(item => item.id);
+                            inventorRef.current.inventions = items.map((item) => item.id);
                         }}
                     />
                 </div>
                 <Button type={'submit'}>Save</Button>
             </form>
+            <Button onClick={() => router.get('/crud/inventors')}>Back</Button>
         </AppHeaderLayout>
     );
 }

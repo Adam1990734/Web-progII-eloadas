@@ -5,6 +5,7 @@ import axios from 'axios';
 import { InventionRequest, InventionResponse } from '@/types/invention';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { BreadcrumbItem } from '@/types';
+import { router } from '@inertiajs/react';
 
 const breadCrumbs: BreadcrumbItem[] = [
     {
@@ -52,7 +53,7 @@ export default function InventionCreateView() {
                 }}
             >
                 <div>
-                    <label>Name:</label> <br/>
+                    <label>Name:</label> <br />
                     <Input type={'text'} onChange={(e) => (invention.current.name = e.currentTarget.value)} required={true} />
                 </div>
                 <Button type={'submit'}>Add</Button>
@@ -62,6 +63,7 @@ export default function InventionCreateView() {
                     <a href={`/crud/inventions/${result.new.id}`}>Click here to watch it!</a>
                 </>
             )}
+            <Button onClick={() => router.get('/crud/inventions')}>Back</Button>
         </AppHeaderLayout>
     );
 }

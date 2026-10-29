@@ -3,6 +3,8 @@ import { InventorResponse, Inventor, BreadcrumbItem } from '@/types';
 import axios from 'axios';
 import InventorDetails from '@/components/inventor/inventor-details';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { router } from '@inertiajs/react';
+import { Button } from '@/components/ui/button';
 
 type Props = {
     id: number;
@@ -37,6 +39,7 @@ export default function InventorDetailsViewView({ id }: Props) {
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
             {inventor ? <InventorDetails inventor={inventor} isComplex={true} /> : <span>Hiba</span>}
+            <Button onClick={() => router.get("/crud/inventors")}>Back</Button>
         </AppHeaderLayout>
     );
 }

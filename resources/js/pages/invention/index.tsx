@@ -4,6 +4,8 @@ import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { router } from '@inertiajs/react';
+import { Button } from '@/components/ui/button';
 
 type Props = {
     hasOperations?: boolean
@@ -38,8 +40,9 @@ export default function InventionIndexView({ hasOperations = true }: Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
+            <Button onClick={() => router.get('/crud/inventions/create')}>Create a new invention</Button>
             <Table headerLabels={['name']} objectToMap={inventions} hasOperations={hasOperations} />
-            <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current}/>
+            <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current} />
         </AppHeaderLayout>
     );
 }

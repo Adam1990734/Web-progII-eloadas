@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventorController;
 
 Route::prefix("/api/inventors/")
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'admin'])
     ->group(function () {
         Route::get("/{id}", [InventorController::class, "details"]);
         Route::post("/", [InventorController::class, "create"]);

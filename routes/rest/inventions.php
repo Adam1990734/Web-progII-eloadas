@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventionController;
 
 Route::prefix("/api/inventions/")
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'admin'])
     ->group(function () {
         Route::get("/suggest", [InventionController::class, "suggestByName"]);
         Route::get("/{id}", [InventionController::class, "details"]);

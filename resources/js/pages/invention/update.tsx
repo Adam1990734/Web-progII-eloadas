@@ -4,6 +4,7 @@ import { BreadcrumbItem, InventionRequest, InventionResponse } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { router } from '@inertiajs/react';
 
 type Props = {
     id: number;
@@ -56,7 +57,7 @@ export default function InventionUpdateView({ id }: Props) {
                 }}
             >
                 <div>
-                    <label>Name:</label> <br/>
+                    <label>Name:</label> <br />
                     <Input
                         type={'text'}
                         defaultValue={inventionRef.current.name ?? ''}
@@ -66,6 +67,7 @@ export default function InventionUpdateView({ id }: Props) {
                 </div>
                 <Button type={'submit'}>Save</Button>
             </form>
+            <Button onClick={() => router.get('/crud/inventions')}>Back</Button>
         </AppHeaderLayout>
     );
 }

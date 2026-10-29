@@ -4,6 +4,8 @@ import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { Button } from '@/components/ui/button';
+import { router } from '@inertiajs/react';
 
 type Props = {
     hasOperations?: boolean;
@@ -38,6 +40,7 @@ export default function InventorIndexView({ hasOperations = true} : Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
+            <Button onClick={() => router.get("/crud/inventors/create")}>Create a new inventor</Button>
             <Table headerLabels={['name', 'born in', 'died in']} objectToMap={inventors} hasOperations={hasOperations} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
         </AppHeaderLayout>

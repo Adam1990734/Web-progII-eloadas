@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { BreadcrumbItem, InventionRequest, InventionResponse } from '@/types';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
+import { router } from '@inertiajs/react';
 
 type Props = {
     id: number
@@ -50,11 +51,12 @@ export default function InventionDeleteView({ id }: Props) {
                 }}
             >
                 <div>
-                    <label>Name:</label> <br/>
+                    <label>Name:</label> <br />
                     <Input type={'text'} defaultValue={invention?.name ?? ''} required={true} disabled={true} />
                 </div>
                 <Button type={'submit'}>Delete</Button>
             </form>
+            <Button onClick={() => router.get('/crud/inventions')}>Back</Button>
         </AppHeaderLayout>
     );
 }
