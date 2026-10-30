@@ -9,6 +9,7 @@ export default function Welcome() {
     );
 }
 */
+
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Head } from '@inertiajs/react';
 
@@ -86,6 +87,31 @@ export default function Welcome() {
                             <h3 className="text-xl font-semibold text-gray-900">Adminisztráció (CRUD)</h3>
                             <p className="text-gray-600 text-sm">
                                 Külön jogosultsági körrel rendelkező Adminisztrátori felület az adatok teljes körű kezelésére (hozzáadás, módosítás, törlés).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* GETTING STARTED SECTION */}
+                <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-8 shadow-md space-y-6">
+                    <h2 className="text-2xl font-bold">Hogyan Kezdje El?</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="space-y-2">
+                            <span className="text-blue-400 font-bold text-lg">01. Regisztráció</span>
+                            <p className="text-slate-300 text-sm">
+                                Hozzon létre egy saját fiókot a regisztrációs felületen, hogy hozzáférjen a bővített funkciókhoz.
+                            </p>
+                        </div>
+                        <div className="space-y-2">
+                            <span className="text-blue-400 font-bold text-lg">02. Adatok Böngészése</span>
+                            <p className="text-slate-300 text-sm">
+                                Tekintse meg az adatbázis tartalmát és elemzéseit az Adatbázis és Diagram menüpontokban.
+                            </p>
+                        </div>
+                        <div className="space-y-2">
+                            <span className="text-blue-400 font-bold text-lg">03. Kapcsolatfelvétel</span>
+                            <p className="text-slate-300 text-sm">
+                                Ha kérdése van, küldjön üzenetet az űrlapon keresztül, amit a rendszereink rögzítenek.
                             </p>
                         </div>
                     </div>
