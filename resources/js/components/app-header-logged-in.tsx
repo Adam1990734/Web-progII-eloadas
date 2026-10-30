@@ -16,6 +16,7 @@ import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, Search } from 'lucide-
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { it } from 'node:test';
 
 const mainNavItems: NavItem[] = [
     {
@@ -39,6 +40,7 @@ const mainNavItems: NavItem[] = [
                 icon: LayoutGrid,
             },
         ],
+        adminRequired: true,
     },
     {
         title: 'Contact',
@@ -129,7 +131,9 @@ export function AppHeaderLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">
                                         <div className="flex flex-col space-y-4">
-                                            {mainNavItems.map((item) =>
+                                            {mainNavItems
+                                                .filter(item => !item.adminRequired || auth.user.role === 1)
+                                                .map((item) =>
                                                 item.children ? (
                                                     <Collapsible key={item.title}>
                                                         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 font-medium">
@@ -190,7 +194,10 @@ export function AppHeaderLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item: NavItem, index) => {
+                                {
+                                    mainNavItems
+                                        .filter(item => !item.adminRequired || auth.user.role === 1)
+                                        .map((item: NavItem, index) => {
                                     if (item.children)
                                         return (
                                             <NavigationMenuItem key={index} className="relative flex h-full items-center">

@@ -21,6 +21,7 @@ export interface NavItem {
     icon?: LucideIcon | null;
     isActive?: boolean;
     children?: NavItem[];
+    adminRequired?: boolean;
 }
 
 export interface SharedData {
@@ -34,6 +35,7 @@ export interface SharedData {
 export interface User {
     id: number;
     name: string;
+    role: number;
     email: string;
     avatar?: string;
     email_verified_at: string | null;
