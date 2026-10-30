@@ -8,8 +8,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('inventor_invention', function (Blueprint $table) {
-            $table->foreignId("invention_id")->constrained()->restrictOnDelete();
-            $table->foreignId("inventor_id")->constrained()->restrictOnDelete();
+            $table->foreignId("invention_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("inventor_id")->constrained()->cascadeOnDelete();
             $table->primary(["invention_id", "inventor_id"]);
         });
     }

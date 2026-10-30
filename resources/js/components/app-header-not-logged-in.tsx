@@ -35,7 +35,7 @@ const mainNavItems: NavItem[] = [
         icon: Folder,
         children: [
             {
-                title: 'Inventor',
+                title: 'Inventors',
                 href: '/show/inventors',
                 icon: LayoutGrid,
             },
@@ -144,7 +144,6 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                                 <a
                                                     key={item.title}
                                                     href={typeof item.href === 'string' ? item.href : item.href.url}
-                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="flex items-center space-x-2 font-medium"
                                                 >
@@ -234,7 +233,6 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                                             <TooltipTrigger>
                                                 <a
                                                     href={typeof item.href === 'string' ? item.href : item.href.url}
-                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="group ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                                                 >

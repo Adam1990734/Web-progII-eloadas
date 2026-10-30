@@ -60,7 +60,7 @@ function Body({ elements, hasOperations = false } : BodyProps) {
 
 export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
-        <div className={'overflow-hidden rounded-xl border border-sidebar-border/70 bg-background shadow-sm dark:border-sidebar-border'}>
+        <div className={'mt-5 overflow-hidden rounded-xl border border-sidebar-border/70 bg-background shadow-sm dark:border-sidebar-border'}>
             <div className={'overflow-x-auto'}>
                 <table className={'w-full text-sm'}>
                     <Header headerLabels={headerLabels} hasOperations={hasOperations} />

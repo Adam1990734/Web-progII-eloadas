@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {return Inertia::render('welcome');})->name('home');
 
+//Kötelező rész:
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', "dashboard")->name("dashboard");
     Route::get('user', [AdminController::class, "adminPage"])->name("user");

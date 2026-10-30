@@ -27,8 +27,10 @@ export default function MessageIndexView() {
 
     return (
         <AppHeaderLayout>
-            <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages}/>
-            <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
+            <div className="mt-5">
+                <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages} />
+                <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
+            </div>
         </AppHeaderLayout>
     );
 }

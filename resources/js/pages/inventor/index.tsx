@@ -6,6 +6,7 @@ import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Button } from '@/components/ui/button';
 import { router } from '@inertiajs/react';
+import { Plus } from 'lucide-react';
 
 type Props = {
     hasOperations?: boolean;
@@ -40,8 +41,24 @@ export default function InventorIndexView({ hasOperations = true} : Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            <Button onClick={() => router.get("/crud/inventors/create")}>Create a new inventor</Button>
-            <Table headerLabels={['name', 'born in', 'died in']} objectToMap={inventors} hasOperations={hasOperations} />
+            { hasOperations &&
+                <div className="mt-5 mb-6 flex items-center justify-between p-2">
+                    <div>
+                        <h1 className="text-2xl font-semibold">Inventors</h1>
+
+                        <p className="text-sm text-muted-foreground">Manage inventors stored in the system.</p>
+                    </div>
+                    <Button
+                        size="lg"
+                        className="gap-2 bg-emerald-600 text-white shadow-sm transition-all hover:bg-emerald-700 hover:shadow-md active:bg-emerald-800"
+                        onClick={() => router.get('/crud/inventors/create')}
+                    >
+                        <Plus className="h-4 w-4" />
+                        Create New Inventor
+                    </Button>
+                </div>
+            }
+            <Table headerLabels={['Name', 'Born In', 'Died In']} objectToMap={inventors} hasOperations={hasOperations} />
             <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
         </AppHeaderLayout>
     );

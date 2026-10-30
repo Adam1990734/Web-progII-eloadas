@@ -34,7 +34,7 @@ const mainNavItems: NavItem[] = [
         icon: Folder,
         children: [
             {
-                title: 'Inventor',
+                title: 'Inventors',
                 href: '/crud/inventors',
                 icon: LayoutGrid,
             },

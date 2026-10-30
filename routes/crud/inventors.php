@@ -10,11 +10,11 @@ Route::prefix("/crud/inventors")
         Route::inertia("/create", "inventor/create");
         Route::get("/{id}", fn(int $id) => Inertia::render("inventor/details", [
             "id" => $id
-        ]));
+        ]))->whereNumber('id');
         Route::get("/update/{id}", fn(int $id) => Inertia::render("inventor/update", [
             "id" => $id
-        ]));
+        ]))->whereNumber('id');
         Route::get("/delete/{id}", fn(int $id) => Inertia::render("inventor/delete", [
             "id" => $id
-        ]));
+        ]))->whereNumber('id');
     });
