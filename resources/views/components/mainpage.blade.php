@@ -34,13 +34,18 @@
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
         @viteReactRefresh
         @vite('resources/js/app.tsx')
         @inertiaHead
-
     </head>
     <body class="font-sans antialiased">
-        @inertia
+        @include('header')
+        @if(Auth::user()->role === 1)
+            @include('admin')
+        @elseif(Auth::user()->role === 2)
+            @include('user')
+        @else
+            @inertia
+        @endif
     </body>
 </html>

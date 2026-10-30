@@ -9,6 +9,7 @@ use \App\Services\InventorService;
 use \App\Services\InventionService;
 use App\Services\MessageService;
 use \App\Services\Implementations;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,6 +41,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Inertia::setRootView('components.mainpage');
     }
 }
