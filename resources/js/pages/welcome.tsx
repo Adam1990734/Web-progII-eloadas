@@ -1,14 +1,4 @@
-/*
-import AppHeaderLayout from '@/layouts/app/app-header-layout';
 
-export default function Welcome() {
-    return (
-        <AppHeaderLayout>
-            <h1>Welcome page!</h1>
-        </AppHeaderLayout>
-    );
-}
-*/
 
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Head } from '@inertiajs/react';
@@ -19,7 +9,7 @@ export default function Welcome() {
             <Head title="Home" />
 
             <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
-                {/* HERO SECTION */}
+
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 md:p-12 text-white shadow-xl">
                     <div className="max-w-2xl space-y-4">
                         <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold uppercase tracking-wider">
@@ -48,7 +38,7 @@ export default function Welcome() {
                     </div>
                 </div>
 
-                {/* OVERVIEW SECTION */}
+
                 <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm space-y-4">
                     <h2 className="text-2xl font-bold text-gray-900">About the Application</h2>
                     <p className="text-gray-600 leading-relaxed">
@@ -56,7 +46,7 @@ export default function Welcome() {
                     </p>
                 </div>
 
-                {/* KEY FEATURES SECTION */}
+
                 <div className="space-y-6">
                     <h2 className="text-2xl font-bold text-gray-900">Key Features</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -92,7 +82,7 @@ export default function Welcome() {
                     </div>
                 </div>
 
-                {/* GETTING STARTED SECTION */}
+
                 <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-8 shadow-md space-y-6">
                     <h2 className="text-2xl font-bold">How to Get Started?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -117,10 +107,10 @@ export default function Welcome() {
                     </div>
                 </div>
 
-                {/* FOOTER / CREDITS SECTION */}
+
                 <footer className="pt-8 border-t border-gray-200 text-center text-sm text-gray-500 space-y-2">
                     <p className="font-medium text-gray-700">Web Programming II – Lecture Assignment</p>
-                    <p>Created by: Bence Gábor Tóth & Ádám Pálmai</p>
+                    <p>Created by: Bence Gábor Tóth (BFRL41) & Ádám Pálmai (YB5SIV)</p>
                     <p className="text-xs text-gray-400">© 2026 John von Neumann University</p>
                 </footer>
             </div>
