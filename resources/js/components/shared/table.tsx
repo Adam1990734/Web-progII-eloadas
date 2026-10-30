@@ -18,12 +18,19 @@ type HeaderProps = {
 
 function Header({ headerLabels, hasOperations: hasOperations = false }: HeaderProps) {
     return (
-        <thead>
+        <thead className={'bg-muted/50'}>
             <tr>
                 {headerLabels.map((label, id) => (
-                    <th key={id}>{label}</th>
+                    <th
+                        key={id}
+                        className={'h-12 px-4 text-left align-middle font-medium text-muted-foreground'}
+                    >
+                        {label}
+                    </th>
                 ))}
-                {hasOperations && <th>Operations</th>}
+                {hasOperations && <th
+                    className={"h-12 px-4 text-right font-medium text-muted-foreground"}
+                >Operations</th>}
             </tr>
         </thead>
     );
@@ -53,9 +60,13 @@ function Body({ elements, hasOperations = false } : BodyProps) {
 
 export default function Table({ objectToMap, headerLabels, hasOperations = false }: Props) {
     return (
-        <table>
-            <Header headerLabels={headerLabels} hasOperations={hasOperations} />
-            <Body elements={objectToMap} hasOperations={hasOperations} />
-        </table>
+        <div className={'overflow-hidden rounded-xl border border-sidebar-border/70 bg-background shadow-sm dark:border-sidebar-border'}>
+            <div className={'overflow-x-auto'}>
+                <table className={'w-full text-sm'}>
+                    <Header headerLabels={headerLabels} hasOperations={hasOperations} />
+                    <Body elements={objectToMap} hasOperations={hasOperations} />
+                </table>
+            </div>
+        </div>
     );
 }

@@ -6,10 +6,10 @@ type Props = {
 
 export default function MessageRow({ message }: Props) {
     return (
-        <tr>
-            <td>{message.userName ?? "Anonymouse"}</td>
-            <td>{message.createdAt.date}</td>
-            <td>{message.content}</td>
+        <tr className={'border-t transition-colors hover:bg-muted/30'}>
+            <td className={'p-4'}>{message.userName ?? 'Anonymouse'}</td>
+            <td className={'p-4'}>{message.createdAt.date}</td>
+            <td className={'p-4'}>{message.content}</td>
         </tr>
     );
 }

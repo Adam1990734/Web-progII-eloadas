@@ -12,11 +12,11 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
     return (
         <>
             {isComplex ? (
-                <tr>
-                    <td>{inventor.name}</td>
-                    <td>{inventor.bornat}</td>
-                    <td>{inventor.diedat ? inventor.diedat : '-'}</td>
-                    <td>
+                <tr className={'border-t transition-colors hover:bg-muted/30'}>
+                    <td className={'p-4'}>{inventor.name}</td>
+                    <td className={'p-4'}>{inventor.bornat}</td>
+                    <td className={'p-4'}>{inventor.diedat ? inventor.diedat : '-'}</td>
+                    <td className={'p-4'}>
                         <ul>
                             {inventor.inventions.map((invention, id) => (
                                 <li key={id}>{invention.name}</li>
@@ -24,25 +24,59 @@ export default function InventorRow({ inventor, isComplex, hasOperations = false
                         </ul>
                     </td>
                     {hasOperations && (
-                        <td>
-                            <Button onClick={() => router.get(`/crud/inventors/${inventor.id}`)}>Details</Button>
-                            <Button onClick={() => router.get(`/crud/inventors/update/${inventor.id}`)}>Update</Button>
-                            <Button onClick={() => router.get(`/crud/inventors/delete/${inventor.id}`)}>Delete</Button>
+                        <td className={'p-4 text-right'}>
+                            <div className={'flex justify-end gap-2'}>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/${inventor.id}`)}
+                                >
+                                    Details
+                                </Button>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/update/${inventor.id}`)}
+                                >
+                                    Update
+                                </Button>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/delete/${inventor.id}`)}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
                         </td>
                     )}
                 </tr>
             ) : (
-                <tr>
-                    <td>{inventor.name}</td>
-                    <td>{inventor.bornat}</td>
-                    <td>{inventor.diedat ? inventor.diedat : '-'}</td>
-                    { hasOperations &&
-                        <td>
-                            <Button onClick={() => router.get(`/crud/inventors/${inventor.id}`)}>Details</Button>
-                            <Button onClick={() => router.get(`/crud/inventors/update/${inventor.id}`)}>Update</Button>
-                            <Button onClick={() => router.get(`/crud/inventors/delete/${inventor.id}`)}>Delete</Button>
+                <tr className={'border-t transition-colors hover:bg-muted/30'}>
+                    <td className={'p-4'}>{inventor.name}</td>
+                    <td className={'p-4'}>{inventor.bornat}</td>
+                    <td className={'p-4'}>{inventor.diedat ? inventor.diedat : '-'}</td>
+                    {hasOperations && (
+                        <td className={'p-4 text-right'}>
+                            <div className={'flex justify-end gap-2'}>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/${inventor.id}`)}
+                                >
+                                    Details
+                                </Button>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/update/${inventor.id}`)}
+                                >
+                                    Update
+                                </Button>
+                                <Button
+                                    className={'inline-flex items-center rounded-md border px-3 py-1.5 text-sm hover:bg-muted'}
+                                    onClick={() => router.get(`/crud/inventors/delete/${inventor.id}`)}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
                         </td>
-                    }
+                    )}
                 </tr>
             )}
         </>

@@ -6,28 +6,26 @@ type Props = {
 }
 export default function InventionDetails({ invention, isComplex } : Props) {
     return (
-        <>
-            {isComplex ? (
-                <>
-                    <div>
-                        <span>Name: </span>
-                        <span>{invention.name}</span>
+        <div className="rounded-xl border bg-card p-6 shadow-sm">
+            <div className="mb-6">
+                <h2 className="text-xl font-semibold">{invention.name}</h2>
+
+                <p className="text-sm text-muted-foreground">Invention</p>
+            </div>
+
+            {isComplex && invention.inventors.length > 0 && (
+                <div className="mt-6 border-t pt-6">
+                    <div className="mb-3 text-sm font-medium">Inventors ({invention.inventors.length})</div>
+
+                    <div className="flex flex-wrap gap-2">
+                        {invention.inventors.map((inv, id) => (
+                            <span key={id} className="rounded-md border bg-muted/30 px-3 py-1 text-sm">
+                                {inv.name}
+                            </span>
+                        ))}
                     </div>
-                    <div>
-                        <span>Inventors: </span>
-                        <ul>
-                            {invention.inventors.map((inventor, id) => (
-                                <li key={id}>{inventor.name}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </>
-            ) : (
-                <div>
-                    <span>Name: </span>
-                    <span>{invention.name}</span>
                 </div>
             )}
-        </>
+        </div>
     );
 }
