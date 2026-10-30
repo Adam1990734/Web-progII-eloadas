@@ -12,17 +12,21 @@ import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, Pencil } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { it } from 'node:test';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: dashboard(),
+        href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'introduction',
+        href: '/',
+        icon: BookOpen,
     },
     {
         title: 'CRUD',
@@ -45,12 +49,12 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Contact',
         href: '/contact',
-        icon: LayoutGrid,
+        icon: Pencil,
     },
     {
         title: 'Messages',
         href: '/messages',
-        icon: LayoutGrid,
+        icon: BookOpen,
     },
     {
         title: 'View Database',
@@ -91,13 +95,8 @@ const mainNavItems: NavItem[] = [
 const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: 'https://github.com/Adam1990734/Web-progII-eloadas',
         icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
     },
 ];
 
@@ -186,7 +185,7 @@ export function AppHeaderLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                         </Sheet>
                     </div>
 
-                    <Link href={dashboard()} prefetch className="flex items-center space-x-2">
+                    <Link href={"/"} prefetch className="flex items-center space-x-2">
                         <AppLogo />
                     </Link>
 
@@ -257,9 +256,6 @@ export function AppHeaderLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
 
                     <div className="ml-auto flex items-center space-x-2">
                         <div className="relative flex items-center space-x-1">
-                            <Button variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer">
-                                <Search className="!size-5 opacity-80 group-hover:opacity-100" />
-                            </Button>
                             <div className="hidden lg:flex">
                                 {rightNavItems.map((item) => (
                                     <TooltipProvider key={item.title} delayDuration={0}>

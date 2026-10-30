@@ -3,40 +3,31 @@ import { Icon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import {
     NavigationMenu,
-    NavigationMenuContent,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
-    NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import { BookOpen, ChevronDown, Folder, LayoutGrid, Menu, LockKeyholeOpenIcon, Pencil } from 'lucide-react';
 import AppLogoIcon from './app-logo-icon';
-import { it } from 'node:test';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import AppLogo from '@/components/app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Log In',
-        href: '/login',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Registration',
-        href: '/register',
-        icon: LayoutGrid,
+        title: 'introduction',
+        href: '/',
+        icon: BookOpen
     },
     {
         title: 'Contact',
         href: '/contact',
-        icon: LayoutGrid,
+        icon: Pencil,
     },
     {
         title: 'View Database',
@@ -77,13 +68,13 @@ const mainNavItems: NavItem[] = [
 const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: 'https://github.com/Adam1990734/Web-progII-eloadas',
         icon: Folder,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'Log In',
+        href: '/login',
+        icon: LockKeyholeOpenIcon,
     },
 ];
 
@@ -168,6 +159,10 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
                         </Sheet>
                     </div>
 
+                    <Link href={'/'} prefetch className="flex items-center space-x-2">
+                        <AppLogo />
+                    </Link>
+
                     {/* Desktop Navigation */}
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
@@ -232,9 +227,6 @@ export function AppHeaderNotLoggedIn({ breadcrumbs = [] }: AppHeaderProps) {
 
                     <div className="ml-auto flex items-center space-x-2">
                         <div className="relative flex items-center space-x-1">
-                            <Button variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer">
-                                <Search className="!size-5 opacity-80 group-hover:opacity-100" />
-                            </Button>
                             <div className="hidden lg:flex">
                                 {rightNavItems.map((item) => (
                                     <TooltipProvider key={item.title} delayDuration={0}>
