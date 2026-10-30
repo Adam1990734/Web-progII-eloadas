@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /* Inertia::setRootView('components.mainpage'); */
-        \Inertia\Inertia::setRootView('components.mainpage');
+        Inertia::setRootView('components.mainpage');
     }
 }
