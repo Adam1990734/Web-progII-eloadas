@@ -116,6 +116,13 @@ export default function Welcome() {
                         </div>
                     </div>
                 </div>
+
+                {/* FOOTER / CREDITS SECTION */}
+                <footer className="pt-8 border-t border-gray-200 text-center text-sm text-gray-500 space-y-2">
+                    <p className="font-medium text-gray-700">Web-programozás II. – Előadás Beadandó Feladat</p>
+                    <p>Készítők: Tóth Bence Gábor & Pálmai Ádám</p>
+                    <p className="text-xs text-gray-400">© 2026 Neumann János Egyetem</p>
+                </footer>
             </div>
         </AppHeaderLayout>
     );
