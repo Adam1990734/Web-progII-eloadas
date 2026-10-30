@@ -40,10 +40,12 @@
     </head>
     <body class="font-sans antialiased">
         @include('header')
-        @if(Auth::user()->role === 1)
-            @include('admin')
-        @elseif(Auth::user()->role === 2)
-            @include('user')
+        @if(Auth::user() !== null)
+            @if(Auth::user()->role === 1)
+                @include('admin')
+            @elseif(Auth::user()->role === 2)
+                @include('user')
+            @endif
         @else
             @inertia
         @endif
