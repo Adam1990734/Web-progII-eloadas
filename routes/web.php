@@ -1,5 +1,6 @@
 <?php
 
+use Dedoc\Scramble\Scramble;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AdminController;
@@ -30,3 +31,7 @@ require __DIR__.'/crud/inventors.php';
 require __DIR__.'/messages.php';
 require __DIR__.'/show.php';
 require __DIR__.'/diagram.php';
+
+if(app()->environment('local')) {
+    Scramble::registerUiRoute('/docs');
+}
