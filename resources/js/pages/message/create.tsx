@@ -22,6 +22,7 @@ export default function MessageCreateView() {
         setResult({
             status: resp.status
         });
+        console.log(resp);
     }
     return (
         <AppHeaderLayout>

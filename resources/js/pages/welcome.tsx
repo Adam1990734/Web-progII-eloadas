@@ -1,5 +1,3 @@
-
-
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Head } from '@inertiajs/react';
 
@@ -23,10 +21,10 @@ export default function Welcome() {
                         </p>
                         <div className="pt-4 flex flex-wrap gap-4">
                             <a
-                                href="/dashboard"
+                                href="/diagrams/withcount"
                                 className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-white text-blue-700 font-medium hover:bg-blue-50 transition shadow-sm"
                             >
-                                View Database
+                                View one of the diagrams
                             </a>
                             <a
                                 href="/contact"

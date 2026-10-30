@@ -31,6 +31,7 @@ class MessageController extends Controller
         ]);
         $messageData['user_id'] = $request->user() !== null ? $request->user()->id : null;
         $message = MessageRequestDto::fromArray($messageData);
+        $this->messageService->create($message);
         return response()->noContent(Response::HTTP_CREATED);
     }
 }
