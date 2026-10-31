@@ -9,9 +9,11 @@ use App\Services\MessageService;
 
 class MessageServiceImp implements MessageService
 {
-    public function findAll($len, $page): array
+    public function findAllDesc($len, $page): array
     {
-        $result = Message::with("user")->paginate(perPage: $len, page: $page);
+        $result = Message::with("user")
+            ->orderByDesc("messages.created_at")
+            ->paginate(perPage: $len, page: $page);
         $result->setCollection(
             $result->getCollection()->map(
                 fn (Message $message) => MessageServiceImp::toRespDto($message)

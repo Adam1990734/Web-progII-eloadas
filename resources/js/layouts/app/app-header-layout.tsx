@@ -5,6 +5,7 @@ import { type BreadcrumbItem, SharedData } from '@/types';
 import type { PropsWithChildren } from 'react';
 import { usePage } from '@inertiajs/react';
 import { AppHeaderNotLoggedIn } from '@/components/app-header-not-logged-in';
+import AppFooter from '@/components/app-footer';
 export default function AppHeaderLayout({ children, breadcrumbs }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
     const page = usePage<SharedData>();
     const isLoggedIn : boolean = page.props.auth?.user ? true : false;
@@ -16,6 +17,7 @@ export default function AppHeaderLayout({ children, breadcrumbs }: PropsWithChil
                 <AppHeaderNotLoggedIn/>
             }
             <AppContent>{children}</AppContent>
+            <AppFooter/>
         </AppShell>
     );
 }

@@ -17,7 +17,7 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         return response()->json(
-            $this->messageService->findAll(
+            $this->messageService->findAllDesc(
                 25,
                 $request->query("page", 1)
             )

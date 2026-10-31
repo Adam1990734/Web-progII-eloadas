@@ -79,9 +79,7 @@ export default function MessageCreateView() {
                     <Card className="border-green-500/30 bg-green-500/5">
                         <CardContent className="flex items-center justify-between py-4">
                             <div>
-                                <p className="font-medium text-green-700 dark:text-green-400">Inventor created successfully.</p>
-
-                                <p className="text-sm text-muted-foreground">The inventor has been added to the database.</p>
+                                <p className="font-medium text-green-700 dark:text-green-400">Message created successfully.</p>
                             </div>
                         </CardContent>
                     </Card>

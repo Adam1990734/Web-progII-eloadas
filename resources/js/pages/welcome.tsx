@@ -46,7 +46,7 @@ export default function Welcome() {
 
 
                 <div className="space-y-6">
-                    <h2 className="text-2xl font-bold text-gray-900">Key Features</h2>
+                    <h2 className="text-2xl font-bold text-shadow-white">Key Features</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-3">
                             <div className="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xl">
@@ -104,13 +104,6 @@ export default function Welcome() {
                         </div>
                     </div>
                 </div>
-
-
-                <footer className="pt-8 border-t border-gray-200 text-center text-sm text-gray-500 space-y-2">
-                    <p className="font-medium text-gray-700">Web Programming II – Lecture Assignment</p>
-                    <p>Created by: Bence Gábor Tóth (BFRL41) & Ádám Pálmai (YB5SIV)</p>
-                    <p className="text-xs text-gray-400">© 2026 John von Neumann University</p>
-                </footer>
             </div>
         </AppHeaderLayout>
     );
