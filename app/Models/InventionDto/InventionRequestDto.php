@@ -11,7 +11,9 @@ class InventionRequestDto implements InventionDto
     public static function fromArray(array $inventor): InventionRequestDto
     {
         return new self(
-            $inventor["name"]
+            htmlspecialchars(
+                trim(strip_tags($inventor["name"]))
+            )
         );
     }
 }

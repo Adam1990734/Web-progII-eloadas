@@ -45,14 +45,6 @@ export default function InventionUpdateView({ id }: Props) {
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
             <div className="mx-auto mt-5 w-full max-w-2xl space-y-6">
-                {result === 204 && (
-                    <Card className="border-green-500/30 bg-green-500/5">
-                        <CardContent className="py-4">
-                            <p className="font-medium text-green-600 dark:text-green-400">Invention updated successfully.</p>
-                        </CardContent>
-                    </Card>
-                )}
-
                 <Card>
                     <CardHeader>
                         <CardTitle>Edit invention</CardTitle>
@@ -102,6 +94,13 @@ export default function InventionUpdateView({ id }: Props) {
                         )}
                     </CardContent>
                 </Card>
+                {result === 204 && (
+                    <Card className="border-green-500/30 bg-green-500/5">
+                        <CardContent className="py-4">
+                            <p className="font-medium text-green-600 dark:text-green-400">Invention updated successfully.</p>
+                        </CardContent>
+                    </Card>
+                )}
             </div>
         </AppHeaderLayout>
     );

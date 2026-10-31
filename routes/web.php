@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {return Inertia::render('welcome');})->name('home');
+Route::inertia('/', "welcome")->name('home');
+Route::get('introduction', [AdminController::class, "adminPage"])->name("introduction");
 
 //Kötelező rész:
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', "dashboard")->name("dashboard");
     Route::get('user', [AdminController::class, "adminPage"])->name("user");
     Route::get('admin', [AdminController::class, "adminPage"])->name("admin");
-    Route::inertia('introduction', "welcome")->name("introduction");
 });
 
 //Rendszer alap:

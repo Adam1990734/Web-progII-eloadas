@@ -21,7 +21,7 @@ const breadCrumbs: BreadcrumbItem[] = [
 ];
 
 export default function InventorCreateView() {
-    const inventorRef = useRef<InventorRequest>({
+    const [inventor, setInventor] = useState<InventorRequest>({
         name: '',
         bornat: 0,
         diedat: null,
@@ -37,13 +37,20 @@ export default function InventorCreateView() {
     });
     const onSubmit = async () => {
         const resp = await axios.post<InventorResponse>('/api/inventors', {
-            ...inventorRef.current,
+            ...inventor,
             inventions: inventions.map((i) => i.id),
         });
         setResult({
             status: resp.status,
             new: { ...resp.data },
         });
+        if(resp.status === 201)
+            setInventor({
+                name: '',
+                bornat: 0,
+                diedat: null,
+                inventions: [],
+            });
     };
 
     return (
@@ -70,7 +77,10 @@ export default function InventorCreateView() {
                                     type="text"
                                     placeholder="Name"
                                     required
-                                    onChange={(e) => (inventorRef.current.name = e.currentTarget.value)}
+                                    onChange={(e) => (setInventor({
+                                        ...inventor,
+                                        name: e.currentTarget.value
+                                    }))}
                                 />
                             </div>
 
@@ -83,7 +93,10 @@ export default function InventorCreateView() {
                                         type="number"
                                         placeholder="1900"
                                         required
-                                        onChange={(e) => (inventorRef.current.bornat = Number(e.currentTarget.value))}
+                                        onChange={(e) => (setInventor({
+                                            ...inventor,
+                                            bornat: Number(e.currentTarget.value)
+                                        }))}
                                     />
                                 </div>
 
@@ -95,7 +108,10 @@ export default function InventorCreateView() {
                                         type="number"
                                         placeholder="2000"
                                         onChange={(e) =>
-                                            (inventorRef.current.diedat = isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber)
+                                            (setInventor({
+                                                ...inventor,
+                                                diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber
+                                            }))
                                         }
                                     />
                                 </div>
@@ -111,7 +127,6 @@ export default function InventorCreateView() {
                                 <Button type="button" variant="outline" onClick={() => router.get('/crud/inventors')}>
                                     Back
                                 </Button>
-
                                 <Button type="submit">Create inventor</Button>
                             </div>
                         </form>

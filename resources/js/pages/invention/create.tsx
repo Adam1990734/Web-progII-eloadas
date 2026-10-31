@@ -21,7 +21,7 @@ const breadCrumbs: BreadcrumbItem[] = [
 ];
 
 export default function InventionCreateView() {
-    const invention = useRef<InventionRequest>({
+    const [invention, setInvention] = useState<InventionRequest>({
         name: '',
     });
     const [result, setResult] = useState<{
@@ -33,12 +33,16 @@ export default function InventionCreateView() {
     });
     const onSubmit = async () => {
         const resp = await axios.post<InventionResponse>('/api/inventions', {
-            ...invention.current,
+            ...invention,
         });
         setResult({
             status: resp.status,
             new: { ...resp.data },
         });
+        if(resp.status === 201)
+            setInvention({
+                name: ''
+            })
     };
 
     return (
@@ -66,7 +70,10 @@ export default function InventionCreateView() {
                                     type="text"
                                     placeholder="Name"
                                     required
-                                    onChange={(e) => (invention.current.name = e.currentTarget.value)}
+                                    onChange={(e) => (setInvention({
+                                        ...invention,
+                                        name: e.currentTarget.value
+                                    }))}
                                 />
                             </div>
 

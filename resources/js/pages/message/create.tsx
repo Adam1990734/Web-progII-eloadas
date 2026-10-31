@@ -22,7 +22,10 @@ export default function MessageCreateView() {
         setResult({
             status: resp.status
         });
-        console.log(resp);
+        if(resp.status === 201)
+            setContent({
+                content: ""
+            })
     }
     return (
         <AppHeaderLayout>
@@ -32,7 +35,6 @@ export default function MessageCreateView() {
                         <CardTitle>New contact message</CardTitle>
                         <CardDescription>Write something for us!</CardDescription>
                     </CardHeader>
-
                     <CardContent>
                         <form
                             className="space-y-6"

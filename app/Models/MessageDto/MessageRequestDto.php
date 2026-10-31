@@ -12,7 +12,9 @@ class MessageRequestDto implements MessageDto
     public static function fromArray(array $message)
     {
         return new self(
-            $message["content"],
+            htmlspecialchars(
+                trim(strip_tags($message["content"]))
+            ),
             $message["user_id"] ?? null
         );
     }
