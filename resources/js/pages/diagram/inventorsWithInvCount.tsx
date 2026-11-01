@@ -16,6 +16,7 @@ export default function DiagramTimelineView() {
     const [data, setData] = useState<ResponseType | null>(null);
     useEffect(() => {
         axios.get<InventorAndInventionCount[]>('/api/diagram/withcount').then((resp) => {
+            console.log(resp);
             setData({
                 status: resp.status,
                 data: resp.data,
@@ -33,7 +34,7 @@ export default function DiagramTimelineView() {
                     </CardHeader>
                     <CardContent>
                         <div className="rounded-xl border bg-background p-4">
-                            <InventorsWithInventionsCount inventorAndCounts={data!.data} />
+                            <InventorsWithInventionsCount inventorAndCounts={data?.data ?? []} />
                         </div>
                     </CardContent>
                 </Card>

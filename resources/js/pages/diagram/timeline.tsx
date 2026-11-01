@@ -34,7 +34,7 @@ export default function DiagramTimelineView() {
                     </CardHeader>
                     <CardContent>
                         <div className="rounded-xl border bg-background p-4">
-                            <InventorsTimeLine timeline={data!.data} />
+                            <InventorsTimeLine timeline={data?.data ?? []} />
                         </div>
                     </CardContent>
                 </Card>
