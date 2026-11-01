@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { InventorResponse, InventorRequest, InventionMinimal, BreadcrumbItem } from '@/types';
-import { useEffect, useRef, useState } from 'react';
+import { InventorResponse, InventorRequest, InventionMinimal, BreadcrumbItem, ValidationError } from '@/types';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import InventionSelector from '@/components/invention/invention-selector';
 import { router } from '@inertiajs/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Loader2 } from 'lucide-react';
+import WhileLoading from '@/components/shared/loadingUntilNull';
 
 type Props = {
     id: number;
@@ -30,7 +30,7 @@ export default function InventorUpdateView({ id }: Props) {
     const [inventor, setInventor] = useState<InventorRequest | null>(null);
     useEffect(() => {
         axios.get<InventorResponse>(`/api/inventors/${id}`).then((resp) => {
-            const { inventions, ...other } = resp.data;
+            const { inventions } = resp.data;
             setInventions(inventions);
             setInventor({
                 ...resp.data,
@@ -39,118 +39,153 @@ export default function InventorUpdateView({ id }: Props) {
         });
     }, []);
 
-    const [result, setResult] = useState<number>(0);
+    const [result, setResult] = useState<{
+        status: number,
+        error: ValidationError | null,
+    }>({
+        status: 0,
+        error: null
+    });
     const onSubmit = async () => {
-        const resp = await axios.put<InventorResponse>(`/api/inventors/${id}`, {
-            ...inventor
-        });
-        setResult(resp.status);
+        const resp = await axios.put<ValidationError>(
+            `/api/inventors/${id}`,
+            {
+                ...inventor,
+            },
+            {
+                validateStatus: (status) => status === 204 || status === 422,
+            },
+        );
+        if (resp.status === 204) {
+            setResult({
+                status: resp.status,
+                error: null,
+            });
+        } else if (resp.status == 422)
+            setResult({
+                status: resp.status,
+                error: resp.data,
+            });
     };
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            <div className="mx-auto mt-5 w-full max-w-3xl space-y-6">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Edit inventor</CardTitle>
-                        <CardDescription>Update inventor details and manage related inventions.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <form
-                            className="space-y-6"
-                            onSubmit={async (e) => {
-                                e.preventDefault();
-                                await onSubmit();
-                            }}
-                        >
-                            <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
-
-                                <Input
-                                    id="name"
-                                    type="text"
-                                    defaultValue={inventor?.name ?? ''}
-                                    required
-                                    onChange={(e) =>
-                                        setInventor({
-                                            ...inventor!,
-                                            name: e.currentTarget.value,
-                                        })
-                                    }
-                                />
-                            </div>
-
-                            <div className="grid gap-4 md:grid-cols-2">
+            <WhileLoading toWait={inventor}>
+                <div className="mx-auto mt-5 w-full max-w-3xl space-y-6">
+                    {result.status === 204 && (
+                        <Card className="border-green-500/30 bg-green-500/5">
+                            <CardContent className="py-4">
+                                <p className="font-medium text-green-600 dark:text-green-400">Inventor updated successfully.</p>
+                            </CardContent>
+                        </Card>
+                    )}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Edit inventor</CardTitle>
+                            <CardDescription>Update inventor details and manage related inventions.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <form
+                                className="space-y-6"
+                                onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    await onSubmit();
+                                }}
+                            >
+                                {result.error && (
+                                    <Card className="border-red-500/30 bg-red-500/5">
+                                        <CardContent className="flex items-center justify-between py-4">
+                                            <div>
+                                                {Object.entries(result.error.errors).map(([key, value]) => (
+                                                    <p className="font-medium text-red-700 dark:text-red-400">{value}</p>
+                                                ))}
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                )}
                                 <div className="space-y-2">
-                                    <Label htmlFor="bornat">Born at</Label>
+                                    <Label htmlFor="name">Name</Label>
 
                                     <Input
-                                        id="bornat"
-                                        type="number"
-                                        defaultValue={inventor?.bornat ?? ''}
-                                        required
+                                        id="name"
+                                        type="text"
+                                        placeholder={inventor?.name ?? ''}
+                                        defaultValue={inventor?.name ?? ''}
                                         onChange={(e) =>
                                             setInventor({
                                                 ...inventor!,
-                                                bornat: e.currentTarget.valueAsNumber,
+                                                name: e.currentTarget.value,
                                             })
                                         }
                                     />
                                 </div>
 
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="bornat">Born at</Label>
+
+                                        <Input
+                                            id="bornat"
+                                            type="number"
+                                            placeholder={inventor?.bornat.toString() ?? ''}
+                                            defaultValue={inventor?.bornat ?? ''}
+                                            onChange={(e) =>
+                                                setInventor({
+                                                    ...inventor!,
+                                                    bornat: e.currentTarget.valueAsNumber,
+                                                })
+                                            }
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="diedat">Died at</Label>
+
+                                        <Input
+                                            id="diedat"
+                                            type="number"
+                                            placeholder={inventor?.diedat?.toString() ?? ''}
+                                            defaultValue={inventor?.diedat ?? ''}
+                                            onChange={(e) =>
+                                                setInventor({
+                                                    ...inventor!,
+                                                    diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber,
+                                                })
+                                            }
+                                        />
+                                    </div>
+                                </div>
+
                                 <div className="space-y-2">
-                                    <Label htmlFor="diedat">Died at</Label>
+                                    <Label>Related inventions</Label>
 
-                                    <Input
-                                        id="diedat"
-                                        type="number"
-                                        defaultValue={inventor?.diedat ?? ''}
-                                        onChange={(e) =>
-                                            setInventor({
-                                                ...inventor!,
-                                                diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber,
-                                            })
-                                        }
-                                    />
+                                    <div className="rounded-lg border p-4">
+                                        <InventionSelector
+                                            value={inventions}
+                                            onChange={(items) => {
+                                                setInventions(items);
+
+                                                setInventor({
+                                                    ...inventor!,
+                                                    inventions: items.map((item) => item.id),
+                                                });
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="space-y-2">
-                                <Label>Related inventions</Label>
+                                <div className="flex items-center justify-between border-t pt-4">
+                                    <Button type="button" variant="outline" onClick={() => router.get('/crud/inventors')}>
+                                        Back
+                                    </Button>
 
-                                <div className="rounded-lg border p-4">
-                                    <InventionSelector
-                                        value={inventions}
-                                        onChange={(items) => {
-                                            setInventions(items);
-
-                                            setInventor({
-                                                ...inventor!,
-                                                inventions: items.map((item) => item.id),
-                                            });
-                                        }}
-                                    />
+                                    <Button type="submit">Save changes</Button>
                                 </div>
-                            </div>
-
-                            <div className="flex items-center justify-between border-t pt-4">
-                                <Button type="button" variant="outline" onClick={() => router.get('/crud/inventors')}>
-                                    Back
-                                </Button>
-
-                                <Button type="submit">Save changes</Button>
-                            </div>
-                        </form>
-                    </CardContent>
-                </Card>
-                {result === 204 && (
-                    <Card className="border-green-500/30 bg-green-500/5">
-                        <CardContent className="py-4">
-                            <p className="font-medium text-green-600 dark:text-green-400">Inventor updated successfully.</p>
+                            </form>
                         </CardContent>
                     </Card>
-                )}
-            </div>
+                </div>
+            </WhileLoading>
         </AppHeaderLayout>
     );
 }

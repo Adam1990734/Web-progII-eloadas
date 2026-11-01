@@ -30,7 +30,7 @@ export default function InventorCreateView() {
     const [inventions, setInventions] = useState<InventionMinimal[]>([]);
     const [result, setResult] = useState<{
         status: number,
-        error: string | null,
+        error: ValidationError | null,
         new: number | null,
     }>({
         status: 0,
@@ -57,7 +57,7 @@ export default function InventorCreateView() {
         } else if (resp.status === 422 && 'errors' in resp.data)
             setResult({
                 status: resp.status,
-                error: resp.data.message,
+                error: resp.data,
                 new: null,
             });
     };
@@ -97,7 +97,9 @@ export default function InventorCreateView() {
                                 <Card className="border-red-500/30 bg-red-500/5">
                                     <CardContent className="flex items-center justify-between py-4">
                                         <div>
-                                            <p className="font-medium text-red-700 dark:text-red-400">{result.error}</p>
+                                            {Object.entries(result.error.errors).map(([key, value]) => (
+                                                <p className="font-medium text-red-700 dark:text-red-400">{value}</p>
+                                            ))}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -109,7 +111,6 @@ export default function InventorCreateView() {
                                     id="name"
                                     type="text"
                                     placeholder="Name"
-                                    required
                                     onChange={(e) =>
                                         setInventor({
                                             ...inventor,
@@ -127,7 +128,6 @@ export default function InventorCreateView() {
                                         id="bornat"
                                         type="number"
                                         placeholder="1900"
-                                        required
                                         onChange={(e) =>
                                             setInventor({
                                                 ...inventor,

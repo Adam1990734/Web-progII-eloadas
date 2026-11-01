@@ -38,12 +38,21 @@ export default function InventionDeleteView({ id }: Props) {
     const onSubmit = async () => {
         const resp = await axios.delete(`/api/inventions/${id}`);
         setResult(resp.status);
+        if(resp.status === 204)
+            setTimeout(() => router.get('/crud/inventions'), 4000);
     };
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
             <WhileLoading toWait={invention}>
                 <div className="mx-auto mt-5 w-full max-w-2xl space-y-6">
+                    {result === 204 && (
+                        <Card className="border-green-500/30 bg-green-500/5">
+                            <CardContent className="py-4">
+                                <p className="font-medium text-green-600 dark:text-green-400">Invention deleted successfully.</p>
+                            </CardContent>
+                        </Card>
+                    )}
                     <Card className="border-destructive/30">
                         <CardHeader>
                             <CardTitle className="text-destructive">Delete invention</CardTitle>
@@ -76,13 +85,6 @@ export default function InventionDeleteView({ id }: Props) {
                             </form>
                         </CardContent>
                     </Card>
-                    {result === 204 && (
-                        <Card className="border-green-500/30 bg-green-500/5">
-                            <CardContent className="py-4">
-                                <p className="font-medium text-green-600 dark:text-green-400">Invention deleted successfully.</p>
-                            </CardContent>
-                        </Card>
-                    )}
                 </div>
             </WhileLoading>
         </AppHeaderLayout>

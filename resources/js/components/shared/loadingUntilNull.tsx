@@ -8,7 +8,7 @@ type Props = {
 export default function WhileLoading({toWait, children} : Props) {
     return (
         <>
-            {toWait === null || ('length' in toWait && toWait.length === 0) ? (
+            { toWait === null || ('length' in toWait && toWait.length === 0) ? (
                 <div className="flex h-80 items-center justify-center">
                     <div className="flex flex-col items-center gap-3">
                         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />

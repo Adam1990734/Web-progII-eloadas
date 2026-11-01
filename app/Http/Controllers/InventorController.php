@@ -30,7 +30,7 @@ class InventorController extends Controller
     {
         $inventor = InventorRequestDto::fromArray($request->validate([
             'name' => ['required', "max:40"],
-            'bornat' => ['required', 'integer'],
+            'bornat' => ['required', 'integer', "min:1"],
             'diedat' => ['nullable', 'integer'],
             'inventions' => ['array']
         ]));
@@ -54,7 +54,7 @@ class InventorController extends Controller
     {
         $inventor = InventorRequestDto::fromArray($request->validate([
             'name' => ['required', "max:40"],
-            'bornat' => ['required', 'integer'],
+            'bornat' => ['required', 'integer', "min:1"],
             'diedat' => ['integer', 'nullable'],
             'inventions' => ['required', 'array'],
             'inventions.*' => ['required', 'integer']

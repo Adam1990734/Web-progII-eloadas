@@ -38,6 +38,7 @@ export default function InventorDeleteView({ id }: Props) {
     const onSubmit = async () => {
         const resp = await axios.delete(`/api/inventors/${id}`);
         setResult(resp.status);
+        if (resp.status === 204) setTimeout(() => router.get('/crud/inventors'), 4000);
     };
 
     return (
