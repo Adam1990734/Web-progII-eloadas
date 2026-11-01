@@ -5,31 +5,51 @@ import axios from 'axios';
 import { MessageRequest } from '@/types';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import error from 'eslint-plugin-react/lib/util/error';
 
 export default function MessageCreateView() {
     const [content, setContent] = useState<MessageRequest>({
         content: ""
     });
     const [result, setResult] = useState<{
-        status: number;
+        status: number,
+        error: string | null
     }>({
-        status: 0
+        status: 0,
+        error: null
     });
     const onSubmit = async () => {
         const resp = await axios.post('/api/messages', {
             ...content
+        }, {
+            validateStatus: (status) => status === 201 || status === 422,
         });
         setResult({
+            ...result,
             status: resp.status
         });
         if(resp.status === 201)
             setContent({
                 content: ""
             })
+        else if(resp.status == 422)
+            setResult({
+                ...result,
+                error: resp.data.message
+            });
     }
     return (
         <AppHeaderLayout>
             <div className="mx-auto mt-5 w-full max-w-3xl space-y-6">
+                {result.status === 201 && (
+                    <Card className="border-green-500/30 bg-green-500/5">
+                        <CardContent className="flex items-center justify-between py-4">
+                            <div>
+                                <p className="font-medium text-green-700 dark:text-green-400">Message created successfully.</p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
                 <Card className="mx-auto mt-5 w-full max-w-3xl">
                     <CardHeader>
                         <CardTitle>New contact message</CardTitle>
@@ -44,8 +64,12 @@ export default function MessageCreateView() {
                             }}
                         >
                             <div className="space-y-2">
+                                {result.error &&
+                                    <div>
+                                        {result.error}
+                                    </div>
+                                }
                                 <Textarea
-                                    required
                                     maxLength={500}
                                     placeholder="Describe your issue, question or feedback..."
                                     className="min-h-[220px] resize-y rounded-xl px-4 py-3 text-sm"
@@ -54,6 +78,7 @@ export default function MessageCreateView() {
                                             content: e.currentTarget.value,
                                         })
                                     }
+                                    value={content.content}
                                 />
 
                                 <div className="flex justify-between text-xs text-muted-foreground">
@@ -75,15 +100,6 @@ export default function MessageCreateView() {
                         </form>
                     </CardContent>
                 </Card>
-                {result.status === 201 && (
-                    <Card className="border-green-500/30 bg-green-500/5">
-                        <CardContent className="flex items-center justify-between py-4">
-                            <div>
-                                <p className="font-medium text-green-700 dark:text-green-400">Message created successfully.</p>
-                            </div>
-                        </CardContent>
-                    </Card>
-                )}
             </div>
         </AppHeaderLayout>
     );
