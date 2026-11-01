@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { BreadcrumbItem, InventorRequest, InventorResponse, InventionMinimal } from '@/types';
+import { BreadcrumbItem, InventorRequest, InventorResponse, InventionMinimal, ValidationError } from '@/types';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
@@ -29,33 +29,57 @@ export default function InventorCreateView() {
     });
     const [inventions, setInventions] = useState<InventionMinimal[]>([]);
     const [result, setResult] = useState<{
-        status: number;
-        new: InventorResponse | null;
+        status: number,
+        error: string | null,
+        new: number | null,
     }>({
         status: 0,
+        error: null,
         new: null,
     });
     const onSubmit = async () => {
-        const resp = await axios.post<InventorResponse>('/api/inventors', {
+        const resp = await axios.post<InventorResponse | ValidationError>('/api/inventors', {
             ...inventor,
             inventions: inventions.map((i) => i.id),
-        });
-        setResult({
-            status: resp.status,
-            new: { ...resp.data },
-        });
-        if(resp.status === 201)
+        }, { validateStatus: (status) => status === 201 || status === 422 });
+        if (resp.status === 201 && 'id' in resp.data) {
+            setResult({
+                status: resp.status,
+                new: resp.data.id,
+                error: null,
+            });
             setInventor({
                 name: '',
                 bornat: 0,
                 diedat: null,
                 inventions: [],
             });
+        } else if (resp.status === 422 && 'errors' in resp.data)
+            setResult({
+                status: resp.status,
+                error: resp.data.message,
+                new: null,
+            });
     };
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
             <div className="mx-auto mt-5 w-full max-w-3xl space-y-6">
+                {result.status === 201 && result.new && (
+                    <Card className="border-green-500/30 bg-green-500/5">
+                        <CardContent className="flex items-center justify-between py-4">
+                            <div>
+                                <p className="font-medium text-green-700 dark:text-green-400">Inventor created successfully.</p>
+
+                                <p className="text-sm text-muted-foreground">The inventor has been added to the database.</p>
+                            </div>
+
+                            <Button asChild>
+                                <a href={`/crud/inventors/${result.new}`}>View inventor</a>
+                            </Button>
+                        </CardContent>
+                    </Card>
+                )}
                 <Card>
                     <CardHeader>
                         <CardTitle>Create inventor</CardTitle>
@@ -69,6 +93,15 @@ export default function InventorCreateView() {
                                 await onSubmit();
                             }}
                         >
+                            {result.error && (
+                                <Card className="border-red-500/30 bg-red-500/5">
+                                    <CardContent className="flex items-center justify-between py-4">
+                                        <div>
+                                            <p className="font-medium text-red-700 dark:text-red-400">{result.error}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            )}
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
 
@@ -77,10 +110,12 @@ export default function InventorCreateView() {
                                     type="text"
                                     placeholder="Name"
                                     required
-                                    onChange={(e) => (setInventor({
-                                        ...inventor,
-                                        name: e.currentTarget.value
-                                    }))}
+                                    onChange={(e) =>
+                                        setInventor({
+                                            ...inventor,
+                                            name: e.currentTarget.value,
+                                        })
+                                    }
                                 />
                             </div>
 
@@ -93,10 +128,12 @@ export default function InventorCreateView() {
                                         type="number"
                                         placeholder="1900"
                                         required
-                                        onChange={(e) => (setInventor({
-                                            ...inventor,
-                                            bornat: Number(e.currentTarget.value)
-                                        }))}
+                                        onChange={(e) =>
+                                            setInventor({
+                                                ...inventor,
+                                                bornat: Number(e.currentTarget.value),
+                                            })
+                                        }
                                     />
                                 </div>
 
@@ -108,10 +145,10 @@ export default function InventorCreateView() {
                                         type="number"
                                         placeholder="2000"
                                         onChange={(e) =>
-                                            (setInventor({
+                                            setInventor({
                                                 ...inventor,
-                                                diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber
-                                            }))
+                                                diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber,
+                                            })
                                         }
                                     />
                                 </div>
@@ -132,22 +169,6 @@ export default function InventorCreateView() {
                         </form>
                     </CardContent>
                 </Card>
-
-                {result.status === 201 && result.new && (
-                    <Card className="border-green-500/30 bg-green-500/5">
-                        <CardContent className="flex items-center justify-between py-4">
-                            <div>
-                                <p className="font-medium text-green-700 dark:text-green-400">Inventor created successfully.</p>
-
-                                <p className="text-sm text-muted-foreground">The inventor has been added to the database.</p>
-                            </div>
-
-                            <Button asChild>
-                                <a href={`/crud/inventors/${result.new.id}`}>View inventor</a>
-                            </Button>
-                        </CardContent>
-                    </Card>
-                )}
             </div>
         </AppHeaderLayout>
     );

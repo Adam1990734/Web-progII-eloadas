@@ -6,6 +6,7 @@ import { MessageRequest } from '@/types';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import error from 'eslint-plugin-react/lib/util/error';
+import { devNull } from 'node:os';
 
 export default function MessageCreateView() {
     const [content, setContent] = useState<MessageRequest>({
@@ -24,17 +25,18 @@ export default function MessageCreateView() {
         }, {
             validateStatus: (status) => status === 201 || status === 422,
         });
-        setResult({
-            ...result,
-            status: resp.status
-        });
-        if(resp.status === 201)
-            setContent({
-                content: ""
+        if(resp.status === 201) {
+            setResult({
+                status: resp.status,
+                error: null
             })
+            setContent({
+                content: '',
+            });
+        }
         else if(resp.status == 422)
             setResult({
-                ...result,
+                status: resp.status,
                 error: resp.data.message
             });
     }
@@ -63,12 +65,16 @@ export default function MessageCreateView() {
                                 await onSubmit();
                             }}
                         >
+                            {result.error && (
+                                <Card className="border-red-500/30 bg-red-500/5">
+                                    <CardContent className="flex items-center justify-between py-4">
+                                        <div>
+                                            <p className="font-medium text-red-700 dark:text-red-400">{result.error}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            )}
                             <div className="space-y-2">
-                                {result.error &&
-                                    <div>
-                                        {result.error}
-                                    </div>
-                                }
                                 <Textarea
                                     maxLength={500}
                                     placeholder="Describe your issue, question or feedback..."

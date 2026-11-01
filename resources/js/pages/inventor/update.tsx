@@ -56,101 +56,91 @@ export default function InventorUpdateView({ id }: Props) {
                         <CardDescription>Update inventor details and manage related inventions.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        {!inventor ? (
-                            <div className="flex h-80 items-center justify-center">
-                                <div className="flex flex-col items-center gap-3">
-                                    <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                        <form
+                            className="space-y-6"
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                await onSubmit();
+                            }}
+                        >
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Name</Label>
 
-                                    <span className="text-sm text-muted-foreground">Loading timeline...</span>
-                                </div>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    defaultValue={inventor?.name ?? ''}
+                                    required
+                                    onChange={(e) =>
+                                        setInventor({
+                                            ...inventor!,
+                                            name: e.currentTarget.value,
+                                        })
+                                    }
+                                />
                             </div>
-                        ) : (
-                            <form
-                                className="space-y-6"
-                                onSubmit={async (e) => {
-                                    e.preventDefault();
-                                    await onSubmit();
-                                }}
-                            >
+
+                            <div className="grid gap-4 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="bornat">Born at</Label>
 
                                     <Input
-                                        id="name"
-                                        type="text"
-                                        defaultValue={inventor?.name ?? ''}
+                                        id="bornat"
+                                        type="number"
+                                        defaultValue={inventor?.bornat ?? ''}
                                         required
                                         onChange={(e) =>
                                             setInventor({
                                                 ...inventor!,
-                                                name: e.currentTarget.value,
+                                                bornat: e.currentTarget.valueAsNumber,
                                             })
                                         }
                                     />
                                 </div>
 
-                                <div className="grid gap-4 md:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="bornat">Born at</Label>
-
-                                        <Input
-                                            id="bornat"
-                                            type="number"
-                                            defaultValue={inventor?.bornat ?? ''}
-                                            required
-                                            onChange={(e) =>
-                                                setInventor({
-                                                    ...inventor!,
-                                                    bornat: e.currentTarget.valueAsNumber,
-                                                })
-                                            }
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="diedat">Died at</Label>
-
-                                        <Input
-                                            id="diedat"
-                                            type="number"
-                                            defaultValue={inventor?.diedat ?? ''}
-                                            onChange={(e) =>
-                                                setInventor({
-                                                    ...inventor!,
-                                                    diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber,
-                                                })
-                                            }
-                                        />
-                                    </div>
-                                </div>
-
                                 <div className="space-y-2">
-                                    <Label>Related inventions</Label>
+                                    <Label htmlFor="diedat">Died at</Label>
 
-                                    <div className="rounded-lg border p-4">
-                                        <InventionSelector
-                                            value={inventions}
-                                            onChange={(items) => {
-                                                setInventions(items);
-
-                                                setInventor({
-                                                    ...inventor!,
-                                                    inventions: items.map((item) => item.id),
-                                                });
-                                            }}
-                                        />
-                                    </div>
+                                    <Input
+                                        id="diedat"
+                                        type="number"
+                                        defaultValue={inventor?.diedat ?? ''}
+                                        onChange={(e) =>
+                                            setInventor({
+                                                ...inventor!,
+                                                diedat: isNaN(e.currentTarget.valueAsNumber) ? null : e.currentTarget.valueAsNumber,
+                                            })
+                                        }
+                                    />
                                 </div>
+                            </div>
 
-                                <div className="flex items-center justify-between border-t pt-4">
-                                    <Button type="button" variant="outline" onClick={() => router.get('/crud/inventors')}>
-                                        Back
-                                    </Button>
+                            <div className="space-y-2">
+                                <Label>Related inventions</Label>
 
-                                    <Button type="submit">Save changes</Button>
+                                <div className="rounded-lg border p-4">
+                                    <InventionSelector
+                                        value={inventions}
+                                        onChange={(items) => {
+                                            setInventions(items);
+
+                                            setInventor({
+                                                ...inventor!,
+                                                inventions: items.map((item) => item.id),
+                                            });
+                                        }}
+                                    />
                                 </div>
-                            </form>
-                        )}
+                            </div>
+
+                            <div className="flex items-center justify-between border-t pt-4">
+                                <Button type="button" variant="outline" onClick={() => router.get('/crud/inventors')}>
+                                    Back
+                                </Button>
+
+                                <Button type="submit">Save changes</Button>
+                            </div>
+                        </form>
                     </CardContent>
                 </Card>
                 {result === 204 && (

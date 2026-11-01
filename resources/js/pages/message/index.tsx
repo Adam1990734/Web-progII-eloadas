@@ -4,6 +4,8 @@ import Table from '@/components/shared/table';
 import Pager from '@/components/shared/pager';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import axios from 'axios';
+import { Loader2 } from 'lucide-react';
+import WhileLoading from '@/components/shared/loadingUntilNull';
 
 export default function MessageIndexView() {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -27,10 +29,12 @@ export default function MessageIndexView() {
 
     return (
         <AppHeaderLayout>
-            <div className="mt-5">
-                <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages} />
-                <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
-            </div>
+            <WhileLoading toWait={messages}>
+                <div className="mt-5">
+                    <Table headerLabels={['Name', 'Created At', 'Content']} objectToMap={messages} />
+                    <Pager currentPage={page} pageSetter={setPage} lastPage={lastPage.current} />
+                </div>
+            </WhileLoading>
         </AppHeaderLayout>
     );
 }

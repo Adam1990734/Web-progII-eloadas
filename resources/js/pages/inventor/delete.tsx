@@ -7,6 +7,7 @@ import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { router } from '@inertiajs/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
+import WhileLoading from '@/components/shared/loadingUntilNull';
 
 type Props = {
     id: number
@@ -41,22 +42,21 @@ export default function InventorDeleteView({ id }: Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            <div className="mx-auto mt-5 w-full max-w-2xl space-y-6">
-                <Card className="border-destructive/30">
-                    <CardHeader>
-                        <CardTitle className="text-destructive">Delete inventor</CardTitle>
-                        <CardDescription>This action cannot be undone. Please review the inventor information before continuing.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {!inventor ? (
-                            <div className="flex h-80 items-center justify-center">
-                                <div className="flex flex-col items-center gap-3">
-                                    <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-
-                                    <span className="text-sm text-muted-foreground">Loading timeline...</span>
-                                </div>
-                            </div>
-                        ) : (
+            <WhileLoading toWait={inventor}>
+                <div className="mx-auto mt-5 w-full max-w-2xl space-y-6">
+                    {result === 204 && (
+                        <Card className="border-green-500/30 bg-green-500/5">
+                            <CardContent className="py-4">
+                                <p className="font-medium text-green-600 dark:text-green-400">Inventor deleted successfully.</p>
+                            </CardContent>
+                        </Card>
+                    )}
+                    <Card className="border-destructive/30">
+                        <CardHeader>
+                            <CardTitle className="text-destructive">Delete inventor</CardTitle>
+                            <CardDescription>This action cannot be undone. Please review the inventor information before continuing.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
                             <form
                                 className="space-y-6"
                                 onSubmit={async (e) => {
@@ -96,17 +96,10 @@ export default function InventorDeleteView({ id }: Props) {
                                     </Button>
                                 </div>
                             </form>
-                        )}
-                    </CardContent>
-                </Card>
-                {result === 204 && (
-                    <Card className="border-green-500/30 bg-green-500/5">
-                        <CardContent className="py-4">
-                            <p className="font-medium text-green-600 dark:text-green-400">Inventor deleted successfully.</p>
                         </CardContent>
                     </Card>
-                )}
-            </div>
+                </div>
+            </WhileLoading>
         </AppHeaderLayout>
     );
 }

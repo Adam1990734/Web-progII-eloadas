@@ -54,3 +54,10 @@ export type { Inventor, InventorMinimal, InventorRequest, InventorResponse };
 export type { Invention, InventionMinimal, InventionRequest, InventionResponse };
 export type { Message, MessageRequest, MessageResponse };
 export type { InventorAndInventionCount, InventorTimeLine };
+
+export interface ValidationError {
+    message: string,
+    errors: {
+        [key: string]: string[]
+    }
+}

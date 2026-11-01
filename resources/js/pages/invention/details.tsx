@@ -5,6 +5,8 @@ import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
+import WhileLoading from '@/components/shared/loadingUntilNull';
 
 type Props = {
     id: number;
@@ -22,7 +24,7 @@ export default function InventionDetailsView({ id }: Props) {
         },
     ];
 
-    const [invention, setInvention] = useState<Invention>();
+    const [invention, setInvention] = useState<Invention | null>(null);
 
     useEffect(() => {
         axios
@@ -38,8 +40,10 @@ export default function InventionDetailsView({ id }: Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            {invention ? <InventionDetails invention={invention} isComplex={true} /> : <span>Hiba</span>}
-            <Button onClick={() => router.get('/crud/inventions')}>Back</Button>
+            <WhileLoading toWait={invention}>
+                <InventionDetails invention={invention!} isComplex={true} />
+                <Button onClick={() => router.get('/crud/inventions')}>Back</Button>
+            </WhileLoading>
         </AppHeaderLayout>
     );
 }

@@ -6,7 +6,9 @@ import axios from 'axios';
 import AppHeaderLayout from '@/layouts/app/app-header-layout';
 import { router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
+import WhileLoading from '@/components/shared/loadingUntilNull';
+import { inventors } from '@/routes';
 
 type Props = {
     hasOperations?: boolean
@@ -41,25 +43,27 @@ export default function InventionIndexView({ hasOperations = true }: Props) {
 
     return (
         <AppHeaderLayout breadcrumbs={breadCrumbs}>
-            { hasOperations &&
-                <div className="mt-5 mb-6 flex items-center justify-between p-2">
-                    <div>
-                        <h1 className="text-2xl font-semibold">Inventions</h1>
-                        <p className="text-sm text-muted-foreground">Manage inventions stored in the system.</p>
-                    </div>
+            <WhileLoading toWait={inventions}>
+                {hasOperations && (
+                    <div className="mt-5 mb-6 flex items-center justify-between p-2">
+                        <div>
+                            <h1 className="text-2xl font-semibold">Inventions</h1>
+                            <p className="text-sm text-muted-foreground">Manage inventions stored in the system.</p>
+                        </div>
 
-                    <Button
-                        size="lg"
-                        className="gap-2 bg-emerald-600 text-white shadow-sm transition-all hover:bg-emerald-700 hover:shadow-md active:bg-emerald-800"
-                        onClick={() => router.get('/crud/inventions/create')}
-                    >
-                        <Plus className="h-4 w-4" />
-                        Create new invention
-                    </Button>
-                </div>
-            }
-            <Table headerLabels={['Name']} objectToMap={inventions} hasOperations={hasOperations} />
-            <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current} />
+                        <Button
+                            size="lg"
+                            className="gap-2 bg-emerald-600 text-white shadow-sm transition-all hover:bg-emerald-700 hover:shadow-md active:bg-emerald-800"
+                            onClick={() => router.get('/crud/inventions/create')}
+                        >
+                            <Plus className="h-4 w-4" />
+                            Create new invention
+                        </Button>
+                    </div>
+                )}
+                <Table headerLabels={['Name']} objectToMap={inventions} hasOperations={hasOperations} />
+                <Pager currentPage={page} pageSetter={setPage} lastPage={lastpage.current} />
+            </WhileLoading>
         </AppHeaderLayout>
     );
 }
